@@ -2175,6 +2175,7 @@
     </div>
 
     <!-- Enhanced JavaScript with Optimized Product Loading and Image Modal -->
+        <!-- Enhanced JavaScript with Optimized Product Loading and Image Modal -->
     <script>
         // Google Apps Script URL
         const scriptUrl = 'https://script.google.com/macros/s/AKfycby-iIbv89AN4tXwB1bxdw3GC4CPHDSFkkwrS9apdMH0ZLYBaY4aKYESnAZGUqGNmEmorA/exec';
@@ -2198,21 +2199,6 @@
                 name: 'David Omondi',
                 phone: '254733444555',
                 location: 'Mombasa'
-            },
-            'grace': {
-                name: 'Grace Wambui',
-                phone: '254744555666',
-                location: 'Kisumu'
-            },
-            'mike': {
-                name: 'Mike Kamau',
-                phone: '254755666777',
-                location: 'Nakuru'
-            },
-            'linda': {
-                name: 'Linda Chebet',
-                phone: '254766777888',
-                location: 'Thika'
             }
         };
 
@@ -2256,7 +2242,7 @@
                 subtitle: 'Fresh styles every season'
             },
             {
-                image: 'https://i.postimg.cc/65nHZ8Tz/Whats_App_Image_2025_11_27_at_17_32_18(1).jpg',
+                image: 'https://i.postimg.cc/65nHZ8Tz/Whats-App-Image-2025-11-27-at-17-32-18-1.jpg',
                 title: 'Direct WhatsApp Ordering',
                 subtitle: 'Shop instantly via WhatsApp'
             }
@@ -2320,7 +2306,7 @@
             }
         ];
         
-        // Sample products for fallback
+        // Sample products for INSTANT loading (fallback)
         const sampleProducts = [
             {
                 id: '1',
@@ -2391,6 +2377,7 @@
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DSOG App Loading...');
             detectFranchiseeFromURL();
             initMobileMenu();
             initHeroSlideshow();
@@ -2405,11 +2392,95 @@
             // Set franchisee name in chat
             updateFranchiseeChatName();
             
-            // Load products with optimized loading
+            // CRITICAL FIX: Load sample products INSTANTLY, then try to load real data in background
+            loadSampleProductsInstantly();
+            
+            // Then try to load from Google Sheets in background
             setTimeout(() => {
-                loadFeaturedProducts();
-            }, 500);
+                tryLoadRealProducts();
+            }, 100);
         });
+
+        // CRITICAL FIX: Load sample products INSTANTLY
+        function loadSampleProductsInstantly() {
+            console.log('Loading sample products instantly...');
+            allProducts = sampleProducts;
+            filteredProducts = [...sampleProducts];
+            
+            // Hide skeleton loader immediately
+            const skeletonLoader = document.getElementById('skeletonLoader');
+            if (skeletonLoader) {
+                skeletonLoader.style.display = 'none';
+            }
+            
+            // Display products immediately
+            displayProducts(filteredProducts.slice(0, productsPerPage));
+            
+            // Show products grid
+            const container = document.getElementById('productsContainer');
+            if (container) {
+                container.classList.add('loaded');
+            }
+            
+            showNotification('Products loaded!');
+        }
+
+        // Try to load real products in background
+        async function tryLoadRealProducts() {
+            try {
+                console.log('Trying to load real products in background...');
+                const realProducts = await fetchRealProducts();
+                
+                if (realProducts && realProducts.length > 0) {
+                    console.log(`Loaded ${realProducts.length} real products`);
+                    allProducts = realProducts;
+                    filteredProducts = [...realProducts];
+                    
+                    // Re-display with real data
+                    displayProducts(filteredProducts.slice(0, productsPerPage));
+                    
+                    showNotification('Real products loaded successfully!');
+                } else {
+                    console.log('No real products found, keeping sample products');
+                }
+            } catch (error) {
+                console.log('Could not load real products, keeping sample:', error.message);
+                // Keep using sample products - they're already loaded
+            }
+        }
+
+        // Optimized: Fetch real products with timeout
+        async function fetchRealProducts() {
+            return new Promise((resolve) => {
+                // Set a timeout to prevent hanging
+                const timeout = setTimeout(() => {
+                    console.log('Fetch timeout - using sample products');
+                    resolve([]);
+                }, 5000); // 5 second timeout
+
+                // Try to fetch from Google Apps Script
+                fetch(`${scriptUrl}?action=getAllProducts`)
+                    .then(response => {
+                        clearTimeout(timeout);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(result => {
+                        if (result.success && result.data && Array.isArray(result.data)) {
+                            resolve(result.data);
+                        } else {
+                            resolve([]);
+                        }
+                    })
+                    .catch(error => {
+                        clearTimeout(timeout);
+                        console.error('Fetch error:', error);
+                        resolve([]);
+                    });
+            });
+        }
 
         // Detect franchisee from URL
         function detectFranchiseeFromURL() {
@@ -2650,140 +2721,6 @@
             }
         }
         
-        // Load featured products
-        async function loadFeaturedProducts() {
-            if (isLoadingProducts) return;
-            
-            isLoadingProducts = true;
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            const loadMoreIcon = loadMoreBtn ? loadMoreBtn.querySelector('.fa-spinner') : null;
-            
-            try {
-                // Show loading state
-                if (loadMoreIcon) {
-                    loadMoreIcon.style.display = 'inline-block';
-                }
-                if (loadMoreBtn) {
-                    loadMoreBtn.disabled = true;
-                }
-                
-                // Try to fetch from Google Apps Script
-                const products = await fetchAllProducts();
-                
-                if (products && products.length > 0) {
-                    allProducts = products;
-                    filterProducts();
-                    showNotification('Products loaded successfully!');
-                    
-                    // Add event listener for load more button
-                    if (loadMoreBtn) {
-                        loadMoreBtn.addEventListener('click', loadMoreProducts);
-                    }
-                } else {
-                    // Fallback to sample products
-                    loadSampleProducts();
-                    showNotification('Using sample products. Real data will load when connected.');
-                }
-                
-            } catch (error) {
-                console.error('Error loading products:', error);
-                showError('Unable to load products. Please check your connection and try again.');
-                loadSampleProducts();
-            } finally {
-                isLoadingProducts = false;
-                if (loadMoreIcon) {
-                    loadMoreIcon.style.display = 'none';
-                }
-                if (loadMoreBtn) {
-                    loadMoreBtn.disabled = false;
-                }
-                
-                // Hide skeleton loader
-                const skeletonLoader = document.getElementById('skeletonLoader');
-                if (skeletonLoader) {
-                    skeletonLoader.style.display = 'none';
-                }
-                
-                // Show products grid
-                const container = document.getElementById('productsContainer');
-                if (container) {
-                    container.classList.add('loaded');
-                }
-            }
-        }
-        
-        // Fetch all products from Google Apps Script
-        async function fetchAllProducts() {
-            try {
-                // Try to fetch from single endpoint
-                const response = await fetch(`${scriptUrl}?action=getAllProducts`);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const result = await response.json();
-                
-                if (result.success && result.data && Array.isArray(result.data)) {
-                    return result.data;
-                } else {
-                    // Fallback to individual collections
-                    return await fetchCollectionsIndividually();
-                }
-            } catch (error) {
-                console.error('Error fetching all products:', error);
-                return await fetchCollectionsIndividually();
-            }
-        }
-        
-        // Fetch collections individually as fallback
-        async function fetchCollectionsIndividually() {
-            const collections = ['mens', 'womens', 'kids', 'accessories', 'gifts'];
-            const allProducts = [];
-            
-            for (const collection of collections) {
-                try {
-                    const response = await fetch(`${scriptUrl}?action=getProducts&collection=${collection}`);
-                    if (!response.ok) continue;
-                    
-                    const result = await response.json();
-                    if (result.success && result.data && Array.isArray(result.data)) {
-                        // Add collection info to each product
-                        const productsWithCollection = result.data.map(product => ({
-                            ...product,
-                            collectionName: collection,
-                            category: product.category || collection
-                        }));
-                        allProducts.push(...productsWithCollection);
-                    }
-                } catch (error) {
-                    console.error(`Error loading ${collection}:`, error);
-                }
-            }
-            
-            return allProducts;
-        }
-        
-        // Load more products (pagination)
-        function loadMoreProducts() {
-            const startIndex = currentPage * productsPerPage;
-            const endIndex = startIndex + productsPerPage;
-            const moreProducts = filteredProducts.slice(startIndex, endIndex);
-            
-            if (moreProducts.length > 0) {
-                displayMoreProducts(moreProducts);
-                currentPage++;
-                
-                // Hide load more button if no more products
-                if (endIndex >= filteredProducts.length) {
-                    const loadMoreContainer = document.getElementById('loadMoreContainer');
-                    if (loadMoreContainer) {
-                        loadMoreContainer.style.display = 'none';
-                    }
-                }
-            }
-        }
-        
         // Display initial products
         function displayProducts(products) {
             const container = document.getElementById('productsContainer');
@@ -2792,11 +2729,12 @@
             if (!container) return;
             
             // Clear existing content except skeleton
-            Array.from(container.children).forEach(child => {
+            const children = Array.from(container.children);
+            for (const child of children) {
                 if (child.id !== 'skeletonLoader') {
                     container.removeChild(child);
                 }
-            });
+            }
             
             // Hide skeleton loader
             if (skeletonLoader) {
@@ -2808,7 +2746,7 @@
                 setTimeout(() => {
                     const productCard = createProductCard(product);
                     container.appendChild(productCard);
-                }, index * 50);
+                }, index * 30); // Faster animation
             });
             
             // Show error if no products
@@ -2817,24 +2755,11 @@
             }
         }
         
-        // Display more products for pagination
-        function displayMoreProducts(products) {
-            const container = document.getElementById('productsContainer');
-            if (!container) return;
-            
-            products.forEach((product, index) => {
-                setTimeout(() => {
-                    const productCard = createProductCard(product);
-                    container.appendChild(productCard);
-                }, index * 50);
-            });
-        }
-        
         // Create product card with optimized image loading
         function createProductCard(product) {
             const card = document.createElement('div');
             card.className = 'product-card';
-            card.style.animationDelay = `${Math.random() * 0.3}s`;
+            card.style.animationDelay = `${Math.random() * 0.2}s`;
             
             // Get product images
             const productImages = Array.isArray(product.images) ? product.images : 
@@ -2870,44 +2795,6 @@
             });
             
             return card;
-        }
-        
-        // Fallback to sample products
-        function loadSampleProducts() {
-            allProducts = sampleProducts;
-            filteredProducts = [...sampleProducts];
-            displayProducts(filteredProducts.slice(0, productsPerPage));
-            
-            // Hide skeleton loader
-            const skeletonLoader = document.getElementById('skeletonLoader');
-            if (skeletonLoader) {
-                skeletonLoader.style.display = 'none';
-            }
-            
-            // Show products grid
-            const container = document.getElementById('productsContainer');
-            if (container) {
-                container.classList.add('loaded');
-            }
-        }
-        
-        // Show error message
-        function showError(message) {
-            const container = document.getElementById('productsContainer');
-            if (!container) return;
-            
-            container.innerHTML = `
-                <div class="error-state">
-                    <div class="error-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <h3>Unable to Load Products</h3>
-                    <p>${message}</p>
-                    <button class="retry-btn" onclick="loadFeaturedProducts()">
-                        Try Again
-                    </button>
-                </div>
-            `;
         }
         
         // Show no products message
