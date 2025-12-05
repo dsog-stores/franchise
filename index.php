@@ -12,19 +12,19 @@ $collections = getCollections();
 // Hero slides data
 $heroSlides = [
     [
-        'image' => 'https://i.postimg.cc/bYnQMMyy/Black-Red-Minimalist-Black-Friday-Sale-Instagram-Post.webp',
-        'title' => 'Affordable Offers',
-        'subtitle' => 'Premium fashion for everyone'
+        'image' => 'https://i.postimg.cc/B6NZCQfY/White-and-Blue-Modern-Minimalist-Shoes-New-Arrival-Instagram-Post.webp',
+        'title' => '',
+        'subtitle' => ''
     ],
     [
         'image' => 'https://i.postimg.cc/nhpfy6qX/Red-and-White-Modern-Sport-Shoes-Fashion-Instagram-Post.webp',
-        'title' => 'New Arrivals',
-        'subtitle' => 'Fresh styles every season'
+        'title' => '',
+        'subtitle' => ''
     ],
     [
         'image' => 'https://i.postimg.cc/65nHZ8Tz/Whats-App-Image-2025-11-27-at-17-32-18-1.jpg',
-        'title' => 'Direct WhatsApp Ordering',
-        'subtitle' => 'Shop instantly via WhatsApp'
+        'title' => '',
+        'subtitle' => ''
     ]
 ];
 
