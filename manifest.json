@@ -8,8 +8,6 @@
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
-  "id": "/",
-  "categories": ["shopping", "fashion", "ecommerce"],
   "icons": [
     {
       "src": "https://i.postimg.cc/CxNLzQgt/Untitled-design-3.webp",
@@ -58,77 +56,6 @@
       "sizes": "512x512",
       "type": "image/webp",
       "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "https://i.postimg.cc/bYnQMMyy/Black_Red_Minimalist_Black_Friday_Sale_Instagram_Post.webp",
-      "sizes": "1280x720",
-      "type": "image/webp",
-      "form_factor": "wide",
-      "label": "DSOG STORES Homepage"
-    },
-    {
-      "src": "https://i.postimg.cc/3NxGjxdK/White-and-Blue-Modern-Minimalist-Shoes-New-Arrival-Instagram-Post-3.webp",
-      "sizes": "1080x1920",
-      "type": "image/webp",
-      "form_factor": "narrow",
-      "label": "DSOG Products"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Browse Products",
-      "short_name": "Products",
-      "description": "View all fashion products",
-      "url": "/#products",
-      "icons": [
-        {
-          "src": "https://i.postimg.cc/CxNLzQgt/Untitled-design-3.webp",
-          "sizes": "96x96",
-          "type": "image/webp"
-        }
-      ]
-    },
-    {
-      "name": "Order via WhatsApp",
-      "short_name": "WhatsApp",
-      "description": "Contact franchisee on WhatsApp",
-      "url": "https://wa.me/254733737983",
-      "icons": [
-        {
-          "src": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/brands/whatsapp.svg",
-          "sizes": "96x96",
-          "type": "image/svg+xml"
-        }
-      ]
-    },
-    {
-      "name": "Men's Collection",
-      "short_name": "Men's",
-      "description": "Browse men's fashion",
-      "url": "/mens.html",
-      "icons": [
-        {
-          "src": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/person.svg",
-          "sizes": "96x96",
-          "type": "image/svg+xml"
-        }
-      ]
-    }
-  ],
-  "related_applications": [],
-  "prefer_related_applications": false,
-  "launch_handler": {
-    "client_mode": "focus-existing"
-  },
-  "edge_side_panel": {
-    "preferred_width": 360
-  },
-  "protocol_handlers": [
-    {
-      "protocol": "web+dsog",
-      "url": "/?protocol=%s"
     }
   ]
 }
