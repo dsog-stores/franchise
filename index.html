@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no">
     
     <!-- App Version -->
-    <meta name="app-version" content="2.0.0">
+    <meta name="app-version" content="2.1.0">
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#B22222">
@@ -15,7 +15,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="DSOG STORES">
     <meta name="msapplication-TileColor" content="#B22222">
-    <meta name="msapplication-starturl" content="/?v=2.0.0">
+    <meta name="msapplication-starturl" content="/?v=2.1.0">
     
     <title>DSOG STORES | Luxury Fashion Store</title>
     
@@ -82,29 +82,30 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
-        
-        /* Enhanced Search Functionality */
+
+        /* Enhanced Search Functionality - CENTERED PROFESSIONALLY */
         .hero-search-container {
             position: absolute;
-            bottom: 60px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 600px;
+            max-width: 700px;
             z-index: 100;
             animation: slideUpSearch 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             opacity: 0;
             animation-delay: 0.5s;
+            padding: 0 20px;
         }
         
         @keyframes slideUpSearch {
             from {
                 opacity: 0;
-                transform: translateX(-50%) translateY(30px);
+                transform: translate(-50%, -40%);
             }
             to {
                 opacity: 1;
-                transform: translateX(-50%) translateY(0);
+                transform: translate(-50%, -50%);
             }
         }
         
@@ -117,23 +118,23 @@
         .search-input-container {
             position: relative;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 50px;
             padding: 5px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25),
-                        0 5px 15px rgba(178, 34, 34, 0.2),
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3),
+                        0 5px 15px rgba(178, 34, 34, 0.25),
                         inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(212, 175, 55, 0.3);
+            border: 2px solid rgba(212, 175, 55, 0.4);
             transition: var(--transition);
         }
         
         .search-input-container:focus-within {
             background: rgba(255, 255, 255, 1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-                        0 8px 20px rgba(178, 34, 34, 0.25),
-                        inset 0 0 0 1px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35),
+                        0 8px 20px rgba(178, 34, 34, 0.3),
+                        inset 0 0 0 1px rgba(212, 175, 55, 0.6);
             transform: translateY(-2px);
             border-color: var(--primary-gold);
         }
@@ -150,11 +151,11 @@
         
         .search-input {
             width: 100%;
-            padding: 18px 65px 18px 55px;
+            padding: 20px 70px 20px 60px;
             background: transparent;
             border: none;
             outline: none;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--text-primary);
             font-weight: 500;
             border-radius: 50px;
@@ -204,8 +205,8 @@
             background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
             color: white;
             border: none;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -422,6 +423,326 @@
             background: linear-gradient(90deg, var(--primary-red), var(--primary-gold));
             width: 0%;
             transition: width 0.3s ease;
+        }
+        
+        /* Shopping Cart Modal */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 400px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 2000;
+            transition: var(--transition);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .cart-modal.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            background: var(--primary-black);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-red);
+        }
+        
+        .cart-header h3 {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+        }
+        
+        .cart-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-close:hover {
+            background: var(--primary-red);
+            transform: rotate(90deg);
+        }
+        
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .cart-item-price {
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .quantity-btn:hover {
+            background: var(--primary-red);
+            color: var(--white);
+            border-color: var(--primary-red);
+        }
+        
+        .cart-item-quantity span {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .remove-item-btn {
+            background: var(--light-red);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        
+        .remove-item-btn:hover {
+            background: var(--dark-red);
+        }
+        
+        .cart-empty {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+        }
+        
+        .cart-empty i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--light-red);
+            opacity: 0.5;
+        }
+        
+        .cart-footer {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .cart-summary {
+            margin-bottom: 1.5rem;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+        
+        .summary-row.total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            border-top: 2px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .delivery-options {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .delivery-options h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        
+        .delivery-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .delivery-option:hover {
+            border-color: var(--primary-red);
+            background: rgba(178, 34, 34, 0.05);
+        }
+        
+        .delivery-option.selected {
+            border-color: var(--primary-red);
+            background: rgba(178, 34, 34, 0.1);
+        }
+        
+        .delivery-info {
+            flex: 1;
+        }
+        
+        .delivery-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .delivery-description {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+        
+        .delivery-price {
+            font-weight: bold;
+            color: var(--primary-red);
+        }
+        
+        .cart-checkout-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            border-radius: 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .cart-checkout-btn:hover {
+            background: var(--secondary-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
+        }
+        
+        .cart-checkout-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .cart-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .cart-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .cart-icon {
+            position: relative;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            padding: 0.4rem 0;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-gold);
+            color: var(--primary-black);
+            font-size: 0.7rem;
+            font-weight: 800;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--primary-black);
         }
         
         /* PWA Install Prompt */
@@ -756,8 +1077,8 @@
         
         /* DSOG Hero Slideshow with Search */
         .hero {
-            height: 60vh;
-            min-height: 400px;
+            height: 70vh;
+            min-height: 500px;
             position: relative;
             overflow: hidden;
             background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
@@ -820,7 +1141,7 @@
             max-width: 700px;
             opacity: 0.9;
             line-height: 1.6;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
         
         .hero-dots {
@@ -1069,6 +1390,12 @@
             flex-grow: 1;
         }
         
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+        
         .whatsapp-btn {
             background: var(--whatsapp-green);
             color: var(--white);
@@ -1077,7 +1404,7 @@
             border-radius: 0;
             font-weight: 600;
             cursor: pointer;
-            width: 100%;
+            flex: 1;
             transition: var(--transition);
             display: flex;
             align-items: center;
@@ -1090,6 +1417,30 @@
         
         .whatsapp-btn:hover {
             background: var(--whatsapp-dark);
+            transform: translateY(-2px);
+        }
+        
+        .add-to-cart-btn {
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: var(--secondary-red);
             transform: translateY(-2px);
         }
         
@@ -1379,6 +1730,64 @@
             flex-grow: 1;
         }
         
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .modal-whatsapp-btn {
+            background: var(--whatsapp-green);
+            color: var(--white);
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+            flex: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .modal-whatsapp-btn:hover {
+            background: var(--whatsapp-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .modal-add-to-cart-btn {
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+            flex: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
+        }
+        
+        .modal-add-to-cart-btn:hover {
+            background: var(--secondary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(178, 34, 34, 0.4);
+        }
+        
         .product-specs {
             background: var(--bg-secondary);
             padding: 1.5rem;
@@ -1416,32 +1825,6 @@
         .spec-value {
             color: var(--text-primary);
             font-weight: 600;
-        }
-        
-        .modal-whatsapp-btn {
-            background: var(--whatsapp-green);
-            color: var(--white);
-            border: none;
-            padding: 1.2rem 2rem;
-            border-radius: 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
-        
-        .modal-whatsapp-btn:hover {
-            background: var(--whatsapp-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
         
         /* Full Image View Modal */
@@ -2112,7 +2495,8 @@
             .view-image-btn,
             .modal-whatsapp-btn,
             .image-control-btn,
-            .image-nav-btn {
+            .image-nav-btn,
+            .add-to-cart-btn {
                 min-height: 44px;
                 min-width: 44px;
             }
@@ -2154,6 +2538,10 @@
                 left: 10px;
                 right: 10px;
             }
+            
+            .cart-modal {
+                width: 100%;
+            }
         }
         
         /* Mobile Responsive */
@@ -2167,17 +2555,22 @@
             .modal-image-container {
                 height: 400px;
             }
+            
+            .hero-search-container {
+                width: 95%;
+                max-width: 600px;
+            }
         }
         
         @media (max-width: 768px) {
             .hero {
-                height: 50vh;
-                min-height: 300px;
+                height: 60vh;
+                min-height: 400px;
             }
             
             .hero-search-container {
-                bottom: 40px;
-                width: 95%;
+                top: 50%;
+                padding: 0 15px;
             }
             
             .search-input-container {
@@ -2185,8 +2578,8 @@
             }
             
             .search-input {
-                padding: 15px 60px 15px 50px;
-                font-size: 0.95rem;
+                padding: 16px 60px 16px 50px;
+                font-size: 1rem;
             }
             
             .search-icon {
@@ -2195,8 +2588,8 @@
             }
             
             .search-btn {
-                width: 40px;
-                height: 40px;
+                width: 42px;
+                height: 42px;
             }
             
             .search-suggestions {
@@ -2217,11 +2610,12 @@
             }
             
             .hero-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .hero-subtitle {
-                font-size: 0.9rem;
+                font-size: 1rem;
+                margin-bottom: 1rem;
             }
             
             .products-grid {
@@ -2243,6 +2637,10 @@
             
             .product-price {
                 font-size: 1.1rem;
+            }
+            
+            .product-actions {
+                flex-direction: column;
             }
             
             .modal-body {
@@ -2303,17 +2701,18 @@
         
         @media (max-width: 480px) {
             .hero {
-                height: 45vh;
-                min-height: 250px;
+                height: 55vh;
+                min-height: 350px;
             }
             
             .hero-search-container {
-                bottom: 30px;
+                top: 50%;
+                padding: 0 10px;
             }
             
             .search-input {
-                padding: 12px 55px 12px 45px;
-                font-size: 0.9rem;
+                padding: 14px 55px 14px 45px;
+                font-size: 0.95rem;
             }
             
             .search-icon {
@@ -2322,8 +2721,8 @@
             }
             
             .search-btn {
-                width: 35px;
-                height: 35px;
+                width: 38px;
+                height: 38px;
             }
             
             .clear-search-btn {
@@ -2421,11 +2820,20 @@
             .nav-label {
                 font-size: 0.55rem;
             }
+            
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cart-item-actions {
+                justify-content: center;
+            }
         }
         
         @media (max-width: 360px) {
             .hero {
-                height: 40vh;
+                height: 50vh;
             }
             
             .product-image-wrapper {
@@ -2456,7 +2864,7 @@
     // App Update Manager
     class AppUpdateManager {
         constructor() {
-            this.currentVersion = '1.0.0';
+            this.currentVersion = '2.1.0';
             this.checkInterval = null;
             
             // Check if app is installed as PWA
@@ -2491,11 +2899,11 @@
                 const manifest = await response.json();
                 
                 // Store current version from manifest
-                this.currentVersion = manifest.version || '1.0.0';
+                this.currentVersion = manifest.version || '2.1.0';
                 localStorage.setItem('dsog_app_version', this.currentVersion);
                 
                 // Check against stored version
-                const storedVersion = localStorage.getItem('dsog_previous_version') || '1.0.0';
+                const storedVersion = localStorage.getItem('dsog_previous_version') || '2.1.0';
                 
                 if (this.currentVersion !== storedVersion) {
                     console.log(`App update available: ${storedVersion} → ${this.currentVersion}`);
@@ -2734,6 +3142,10 @@
                 <a href="kids.html">Kids</a>
                 <a href="accessories.html">Accessories</a>
                 <a href="gifts.html">Gifts</a>
+                <a href="#" class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
                 <a href="#" class="install-app-btn" id="installAppBtn">
                     <i class="fas fa-download"></i>
                     <span>Install App</span>
@@ -2748,6 +3160,33 @@
             </button>
         </div>
     </header>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Your Shopping Cart</h3>
+            <button class="cart-close" id="cartClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be populated here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-summary" id="cartSummary">
+                <!-- Cart summary will be populated here -->
+            </div>
+            <div class="delivery-options" id="deliveryOptions">
+                <!-- Delivery options will be populated here -->
+            </div>
+            <button class="cart-checkout-btn" id="checkoutBtn" disabled>
+                <i class="fab fa-whatsapp"></i> Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+    
+    <!-- Cart Backdrop -->
+    <div class="cart-backdrop" id="cartBackdrop"></div>
 
     <!-- PWA Install Prompt -->
     <div class="pwa-install-prompt" id="pwaInstallPrompt">
@@ -2785,6 +3224,9 @@
             <a href="kids.html" onclick="closeMobileMenu()">Kids</a>
             <a href="accessories.html" onclick="closeMobileMenu()">Accessories</a>
             <a href="gifts.html" onclick="closeMobileMenu()">Gifts</a>
+            <a href="#" onclick="openCart(); closeMobileMenu();" style="color: var(--primary-gold);">
+                <i class="fas fa-shopping-cart"></i> Cart (<span id="mobileCartCount">0</span>)
+            </a>
             <a href="mailto:care.dsogstores@gmail.com" onclick="closeMobileMenu()">Email Us</a>
             <a href="https://wa.me/254733737983" onclick="closeMobileMenu()">WhatsApp</a>
             <a href="#" onclick="showInstallPrompt(); closeMobileMenu();" style="color: var(--primary-gold);">
@@ -2802,7 +3244,7 @@
             <!-- Slides will be populated by JavaScript -->
         </div>
         
-        <!-- Professional Search Functionality -->
+        <!-- Professional Search Functionality - CENTERED -->
         <div class="hero-search-container">
             <div class="search-wrapper">
                 <div class="search-input-container">
@@ -2865,7 +3307,7 @@
     <section class="products" id="products">
         <div class="section-title">
             <h2>Featured Products</h2>
-            <p>Premium fashion items with direct WhatsApp ordering</p>
+            <p>Premium fashion items with cart functionality</p>
         </div>
         
         <!-- Product Filters -->
@@ -3011,12 +3453,13 @@
                 <span class="nav-label">Products</span>
             </a>
             
-            <!-- Gifts Button -->
-            <a href="gifts.html" class="nav-item" onclick="setActiveNav(this)">
+            <!-- Cart Button -->
+            <a href="#" class="nav-item" onclick="openCart(); setActiveNav(this)">
                 <div class="nav-icon">
-                    <i class="fas fa-gift"></i>
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="nav-badge" id="bottomNavCartCount">0</span>
                 </div>
-                <span class="nav-label">Gifts</span>
+                <span class="nav-label">Cart</span>
             </a>
             
             <!-- Contact Button -->
@@ -3078,13 +3521,29 @@
         </div>
     </div>
 
-    <!-- Enhanced JavaScript with Optimized Product Loading, Image Modal, and PWA -->
+    <!-- Enhanced JavaScript with Cart Functionality -->
     <script>
         // Google Apps Script URL - UPDATE THIS
         const scriptUrl = 'https://script.google.com/macros/s/AKfycby-iIbv89AN4tXwB1bxdw3GC4CPHDSFkkwrS9apdMH0ZLYBaY4aKYESnAZGUqGNmEmorA/exec';
         
         // WhatsApp number
         const mainWhatsAppNumber = '254733737983';
+        
+        // Delivery options
+        const deliveryOptions = [
+            {
+                id: 'standard',
+                name: 'Standard Delivery',
+                description: 'Within coverage area (2-3 business days)',
+                price: 150
+            },
+            {
+                id: 'express',
+                name: 'Express Delivery',
+                description: 'Outside coverage area (1-2 business days)',
+                price: 300
+            }
+        ];
         
         // Franchisee database with their WhatsApp numbers
         const franchisees = {
@@ -3165,6 +3624,10 @@
         let currentPage = 1;
         const productsPerPage = 12;
         
+        // Cart management variables
+        let cart = [];
+        let selectedDeliveryOption = null;
+        
         // Image modal variables
         let currentImageIndex = 0;
         let currentImages = [];
@@ -3187,6 +3650,9 @@
         // Mobile menu state
         let isMobileMenuOpen = false;
         
+        // Cart modal state
+        let isCartOpen = false;
+        
         // WhatsApp chat state
         let isChatOpen = false;
         
@@ -3200,10 +3666,13 @@
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 DSOG STORES App - Home Page');
+            console.log('🚀 DSOG STORES App - Home Page v2.1.0');
             
             // Initialize App Update Manager
             window.appUpdateManager = new AppUpdateManager();
+            
+            // Load cart from localStorage
+            loadCart();
             
             detectFranchiseeFromURL();
             initMobileMenu();
@@ -3211,6 +3680,7 @@
             loadCollections();
             initProductFilters();
             initModal();
+            initCart();
             initBottomNav();
             initNavToggle();
             initWhatsAppChat();
@@ -3235,6 +3705,322 @@
             });
         });
 
+        // Initialize Cart Functionality
+        function initCart() {
+            const cartIcon = document.getElementById('cartIcon');
+            const cartModal = document.getElementById('cartModal');
+            const cartClose = document.getElementById('cartClose');
+            const cartBackdrop = document.getElementById('cartBackdrop');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            // Open cart
+            cartIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                openCart();
+            });
+            
+            // Close cart
+            cartClose.addEventListener('click', closeCart);
+            cartBackdrop.addEventListener('click', closeCart);
+            
+            // Checkout button
+            checkoutBtn.addEventListener('click', checkoutCart);
+            
+            // Close cart with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && isCartOpen) {
+                    closeCart();
+                }
+            });
+            
+            // Initialize delivery options
+            initDeliveryOptions();
+        }
+        
+        function openCart() {
+            const cartModal = document.getElementById('cartModal');
+            const cartBackdrop = document.getElementById('cartBackdrop');
+            
+            cartModal.classList.add('active');
+            cartBackdrop.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            isCartOpen = true;
+            
+            updateCartDisplay();
+            hideBottomNav();
+        }
+        
+        function closeCart() {
+            const cartModal = document.getElementById('cartModal');
+            const cartBackdrop = document.getElementById('cartBackdrop');
+            
+            cartModal.classList.remove('active');
+            cartBackdrop.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            isCartOpen = false;
+            
+            setTimeout(showBottomNav, 300);
+        }
+        
+        function loadCart() {
+            const savedCart = localStorage.getItem('dsog_cart');
+            if (savedCart) {
+                try {
+                    cart = JSON.parse(savedCart);
+                    updateCartCount();
+                } catch (error) {
+                    console.error('Error loading cart:', error);
+                    cart = [];
+                }
+            }
+        }
+        
+        function saveCart() {
+            localStorage.setItem('dsog_cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+        
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            // Update cart count in header
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+            
+            // Update mobile cart count
+            const mobileCartCount = document.getElementById('mobileCartCount');
+            if (mobileCartCount) {
+                mobileCartCount.textContent = totalItems;
+            }
+            
+            // Update bottom nav cart count
+            const bottomNavCartCount = document.getElementById('bottomNavCartCount');
+            if (bottomNavCartCount) {
+                bottomNavCartCount.textContent = totalItems;
+                bottomNavCartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
+        
+        function addToCart(product) {
+            // Check if product already exists in cart
+            const existingItemIndex = cart.findIndex(item => item.id === product.id);
+            
+            if (existingItemIndex > -1) {
+                // Increment quantity
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                // Add new item
+                cart.push({
+                    id: product.id || Date.now().toString(),
+                    name: product.name,
+                    price: product.basePrice,
+                    image: product.images ? product.images[0] : product.image,
+                    category: product.category || product.collectionName,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            showNotification(`Added ${product.name} to cart`);
+            
+            // If cart is open, update display
+            if (isCartOpen) {
+                updateCartDisplay();
+            }
+        }
+        
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            
+            if (isCartOpen) {
+                updateCartDisplay();
+            }
+        }
+        
+        function updateCartItemQuantity(productId, newQuantity) {
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            
+            if (itemIndex > -1) {
+                if (newQuantity < 1) {
+                    removeFromCart(productId);
+                } else {
+                    cart[itemIndex].quantity = newQuantity;
+                    saveCart();
+                    
+                    if (isCartOpen) {
+                        updateCartDisplay();
+                    }
+                }
+            }
+        }
+        
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartSummaryContainer = document.getElementById('cartSummary');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            // Clear existing content
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                // Show empty cart message
+                cartItemsContainer.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some products to get started!</p>
+                    </div>
+                `;
+                
+                cartSummaryContainer.innerHTML = '';
+                checkoutBtn.disabled = true;
+                return;
+            }
+            
+            // Calculate subtotal
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const deliveryFee = selectedDeliveryOption ? selectedDeliveryOption.price : 0;
+            const total = subtotal + deliveryFee;
+            
+            // Display cart items
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <div class="cart-item-price">KSh ${item.price}</div>
+                        <div class="cart-item-actions">
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn" onclick="updateCartItemQuantity('${item.id}', ${item.quantity - 1})">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateCartItemQuantity('${item.id}', ${item.quantity + 1})">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <button class="remove-item-btn" onclick="removeFromCart('${item.id}')">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+            
+            // Update cart summary
+            cartSummaryContainer.innerHTML = `
+                <div class="summary-row">
+                    <span>Subtotal (${cart.reduce((total, item) => total + item.quantity, 0)} items)</span>
+                    <span>KSh ${subtotal}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <span>${deliveryFee > 0 ? `KSh ${deliveryFee}` : 'Select delivery option'}</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span>KSh ${total}</span>
+                </div>
+            `;
+            
+            // Enable/disable checkout button
+            checkoutBtn.disabled = deliveryFee === 0;
+        }
+        
+        function initDeliveryOptions() {
+            const deliveryOptionsContainer = document.getElementById('deliveryOptions');
+            
+            deliveryOptionsContainer.innerHTML = `
+                <h4>Delivery Options</h4>
+                ${deliveryOptions.map(option => `
+                    <div class="delivery-option ${selectedDeliveryOption && selectedDeliveryOption.id === option.id ? 'selected' : ''}" 
+                         data-id="${option.id}"
+                         onclick="selectDeliveryOption('${option.id}')">
+                        <div class="delivery-info">
+                            <div class="delivery-name">${option.name}</div>
+                            <div class="delivery-description">${option.description}</div>
+                        </div>
+                        <div class="delivery-price">KSh ${option.price}</div>
+                    </div>
+                `).join('')}
+            `;
+        }
+        
+        function selectDeliveryOption(optionId) {
+            selectedDeliveryOption = deliveryOptions.find(option => option.id === optionId);
+            
+            // Update UI
+            document.querySelectorAll('.delivery-option').forEach(option => {
+                option.classList.remove('selected');
+                if (option.dataset.id === optionId) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            // Enable checkout button and update cart display
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            checkoutBtn.disabled = false;
+            
+            updateCartDisplay();
+        }
+        
+        function checkoutCart() {
+            if (cart.length === 0 || !selectedDeliveryOption) {
+                showNotification('Please add items to cart and select delivery option');
+                return;
+            }
+            
+            // Calculate totals
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const deliveryFee = selectedDeliveryOption.price;
+            const total = subtotal + deliveryFee;
+            
+            // Determine which WhatsApp number to use
+            const whatsappNumber = currentFranchisee ? currentFranchisee.phone : mainWhatsAppNumber;
+            const contactName = currentFranchisee ? currentFranchisee.name : 'DSOG STORES';
+            
+            // Build order message
+            let message = `Hello ${contactName}! I would like to place an order:\n\n`;
+            
+            // Add items
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} x${item.quantity} - KSh ${item.price * item.quantity}\n`;
+            });
+            
+            // Add summary
+            message += `\nSubtotal: KSh ${subtotal}\n`;
+            message += `Delivery (${selectedDeliveryOption.name}): KSh ${deliveryFee}\n`;
+            message += `Total: KSh ${total}\n\n`;
+            message += `Delivery Option: ${selectedDeliveryOption.name}\n`;
+            message += `Delivery Details: ${selectedDeliveryOption.description}\n\n`;
+            message += `Please confirm availability and provide payment details.`;
+            
+            // Add franchisee info
+            if (currentFranchisee) {
+                message += `\n\n---\nOrder placed through ${currentFranchisee.name} (${currentFranchisee.location})`;
+            }
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+            showNotification('Opening WhatsApp for checkout');
+            
+            // Clear cart after checkout
+            cart = [];
+            selectedDeliveryOption = null;
+            saveCart();
+            updateCartDisplay();
+            closeCart();
+        }
+        
         // Initialize Search Functionality
         function initSearch() {
             const searchInput = document.getElementById('searchInput');
@@ -3737,8 +4523,6 @@
             // Initialize install buttons
             initInstallButtons();
             
-            // REMOVED: generateManifest() function - Using static manifest.json instead
-            
             // Register service worker
             registerServiceWorker();
         }
@@ -3759,7 +4543,7 @@
                                     console.log('🔄 New content is available; please refresh.');
                                     // Show update notification
                                     window.appUpdateManager.showUpdateNotification(
-                                        localStorage.getItem('dsog_app_version') || '1.0.0',
+                                        localStorage.getItem('dsog_app_version') || '2.1.0',
                                         'New version'
                                     );
                                 }
@@ -4222,7 +5006,7 @@
             });
         }
         
-        // Create product card with optimized image loading - FIXED VERSION
+        // Create product card with cart functionality
         function createProductCard(product) {
             try {
                 const card = document.createElement('div');
@@ -4233,7 +5017,7 @@
                 const productImages = product.images || [product.image];
                 const mainImage = productImages[0];
                 
-                // Properly escape quotes and special characters in product name
+                // Properly escape quotes and special characters
                 const escapedProductName = product.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
                 const imageUrlsString = productImages.join(',').replace(/'/g, "\\'");
                 
@@ -4249,19 +5033,27 @@
                         <h3 class="product-title">${product.name}</h3>
                         <div class="product-price">KSh ${product.basePrice}</div>
                         <p class="product-description">${product.description || 'Premium quality product from DSOG STORES. Crafted with attention to detail.'}</p>
-                        <button class="whatsapp-btn" onclick="event.stopPropagation(); orderViaWhatsApp('${escapedProductName}', ${product.basePrice}, event)">
-                            <i class="fab fa-whatsapp"></i> Order via WhatsApp
-                        </button>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${JSON.stringify(product).replace(/'/g, "\\'")})">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                            <button class="whatsapp-btn" onclick="event.stopPropagation(); orderViaWhatsApp('${escapedProductName}', ${product.basePrice}, event)">
+                                <i class="fab fa-whatsapp"></i> Buy Now
+                            </button>
+                        </div>
                     </div>
                 `;
                 
-                // Add click event to open modal - FIXED with better event handling
+                // Add click event to open modal
                 card.addEventListener('click', function(e) {
-                    // Only open modal if click is not on whatsapp button, view button, or their children
-                    if (!e.target.closest('.whatsapp-btn') && 
+                    // Only open modal if click is not on buttons
+                    if (!e.target.closest('.add-to-cart-btn') && 
+                        !e.target.closest('.whatsapp-btn') &&
                         !e.target.closest('.view-image-btn') &&
+                        !e.target.matches('.add-to-cart-btn') &&
                         !e.target.matches('.whatsapp-btn') &&
                         !e.target.matches('.view-image-btn') &&
+                        !e.target.closest('.fa-cart-plus') &&
                         !e.target.closest('.fa-whatsapp') &&
                         !e.target.closest('.fa-expand')) {
                         openModal(product);
@@ -4290,16 +5082,21 @@
                         <div class="product-badge">${product.category || 'Product'}</div>
                         <h3 class="product-title">${product.name}</h3>
                         <div class="product-price">KSh ${product.basePrice}</div>
-                        <button class="whatsapp-btn" onclick="orderViaWhatsApp('${product.name}', ${product.basePrice}, event)">
-                            <i class="fab fa-whatsapp"></i> Order via WhatsApp
-                        </button>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn" onclick="addToCart(${JSON.stringify(product).replace(/'/g, "\\'")})">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                            <button class="whatsapp-btn" onclick="orderViaWhatsApp('${product.name}', ${product.basePrice})">
+                                <i class="fab fa-whatsapp"></i> Buy Now
+                            </button>
+                        </div>
                     </div>
                 `;
                 return fallbackCard;
             }
         }
         
-        // Fallback sample products - FIXED VERSION
+        // Fallback sample products
         function loadSampleProducts() {
             const sampleProducts = [
                 {
@@ -4463,9 +5260,14 @@
                             </ul>
                         </div>
                         
-                        <button class="modal-whatsapp-btn" onclick="orderViaWhatsApp('${escapedProductName}', ${product.basePrice})">
-                            <i class="fab fa-whatsapp"></i> Order via WhatsApp
-                        </button>
+                        <div class="modal-actions">
+                            <button class="modal-add-to-cart-btn" onclick="addToCart(${JSON.stringify(product).replace(/'/g, "\\'")}); closeModal();">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                            <button class="modal-whatsapp-btn" onclick="orderViaWhatsApp('${escapedProductName}', ${product.basePrice})">
+                                <i class="fab fa-whatsapp"></i> Buy Now
+                            </button>
+                        </div>
                     </div>
                 `;
                 
@@ -4661,7 +5463,7 @@
             fullImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom}) rotate(${currentRotation}deg)`;
         }
         
-        // Open full image view - FIXED VERSION
+        // Open full image view
         window.openFullImageView = function(imageUrls, productName) {
             try {
                 // Ensure imageUrls is properly formatted
@@ -4776,7 +5578,7 @@
             setTimeout(showBottomNav, 300);
         }
         
-        // WhatsApp ordering function - FIXED VERSION
+        // WhatsApp ordering function
         function orderViaWhatsApp(productName, price, event = null) {
             if (event) event.stopPropagation();
             
@@ -4875,6 +5677,14 @@
             
             navItems.forEach(item => {
                 item.addEventListener('click', function(e) {
+                    // For cart link
+                    if (this.href === '#' && this.querySelector('.fa-shopping-cart')) {
+                        e.preventDefault();
+                        openCart();
+                        setActiveNav(this);
+                        return;
+                    }
+                    
                     // For gifts.html link, allow normal navigation
                     if (this.getAttribute('href') === 'gifts.html') {
                         setActiveNav(this);
@@ -5006,7 +5816,7 @@
                 case 'order':
                     addChatMessage('I want to place an order', 'user');
                     setTimeout(() => {
-                        addChatMessage('Great! Browse our products and click the "Order via WhatsApp" button on any item. You\'ll be connected directly to ' + (currentFranchisee ? currentFranchisee.name : 'our team') + ' for ordering.', 'bot');
+                        addChatMessage('Great! Browse our products and use the cart functionality to add items. You can then checkout via WhatsApp with delivery options.', 'bot');
                     }, 500);
                     break;
                     
@@ -5054,12 +5864,14 @@
         function handleBotResponse(message) {
             let response = '';
             
-            if (message.includes('product') || message.includes('item') || message.includes('buy')) {
+            if (message.includes('cart') || message.includes('checkout')) {
+                response = 'You can add items to your cart by clicking the "Add to Cart" button on any product. Then click the cart icon to review your order and checkout.';
+            } else if (message.includes('delivery') || message.includes('shipping')) {
+                response = 'We offer two delivery options: Standard Delivery (KSh 150 within coverage area) and Express Delivery (KSh 300 outside coverage area). You can select your preferred option during checkout.';
+            } else if (message.includes('product') || message.includes('item') || message.includes('buy')) {
                 response = 'You can browse all our collections from the menu. We have Men\'s, Women\'s, Kids, Accessories, and Gifts collections!';
             } else if (message.includes('price') || message.includes('cost') || message.includes('how much')) {
                 response = 'All prices are listed with each product. You can see them in the Products section.';
-            } else if (message.includes('delivery') || message.includes('shipping')) {
-                response = 'We offer delivery services. Delivery details will be discussed when you place your order via WhatsApp.';
             } else if (message.includes('size') || message.includes('fit')) {
                 response = 'Size information is available for each product. Please check the product details or ask when ordering.';
             } else if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
@@ -5069,7 +5881,7 @@
             } else if (message.includes('gift') || message.includes('present')) {
                 response = 'Check out our Gifts collection for special gift ideas. Click the Gifts button in the bottom navigation!';
             } else {
-                response = 'I\'m here to help! You can browse our collections, place orders via WhatsApp, or ask about specific items.';
+                response = 'I\'m here to help! You can browse our collections, add items to cart, or ask about delivery options.';
             }
             
             addChatMessage(response, 'bot');
@@ -5153,7 +5965,9 @@
             .view-image-btn,
             .image-zoom-btn,
             .modal-whatsapp-btn,
-            .chat-option-btn {
+            .chat-option-btn,
+            .add-to-cart-btn,
+            .modal-add-to-cart-btn {
                 cursor: pointer !important;
             }
             
