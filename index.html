@@ -2800,7 +2800,36 @@
                 right: 1rem;
                 padding: 0.6rem 1rem;
             }
+            /* Add to your existing CSS */
+            @media (max-width: 768px) {
+                #loadMoreContainer {
+                    margin-bottom: 100px !important; /* Add space for bottom nav */
+                }
+            }
             
+            @media (max-width: 480px) {
+                #loadMoreContainer {
+                    margin-bottom: 90px !important;
+                }
+            }
+            
+            /* Ensure products section has proper spacing */
+            .products {
+                padding-bottom: 100px !important; /* Add space for bottom nav */
+            }
+            
+            /* Fix z-index for bottom nav */
+            .bottom-nav {
+                z-index: 999; /* Lower than modal but above content */
+            }
+            
+            .product-modal, .full-image-modal {
+                z-index: 2000; /* Higher than bottom nav */
+            }
+            
+            .cart-modal {
+                z-index: 2001; /* Highest for cart */
+            }
             .bottom-nav-container {
                 gap: 0.2rem;
             }
@@ -3304,6 +3333,7 @@
     </section>
 
     <!-- Products Section -->
+    <!-- Products Section - UPDATED -->
     <section class="products" id="products">
         <div class="section-title">
             <h2>Featured Products</h2>
@@ -3324,47 +3354,12 @@
         <div class="products-grid" id="productsContainer">
             <!-- Products will be populated by JavaScript -->
             <div class="skeleton-grid" id="skeletonLoader">
-                <div class="skeleton-card">
-                    <div class="skeleton-image"></div>
-                    <div class="skeleton-info">
-                        <div class="skeleton-text short"></div>
-                        <div class="skeleton-text medium"></div>
-                        <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-btn"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-image"></div>
-                    <div class="skeleton-info">
-                        <div class="skeleton-text short"></div>
-                        <div class="skeleton-text medium"></div>
-                        <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-btn"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-image"></div>
-                    <div class="skeleton-info">
-                        <div class="skeleton-text short"></div>
-                        <div class="skeleton-text medium"></div>
-                        <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-btn"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-image"></div>
-                    <div class="skeleton-info">
-                        <div class="skeleton-text short"></div>
-                        <div class="skeleton-text medium"></div>
-                        <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-btn"></div>
-                    </div>
-                </div>
+                <!-- Skeleton cards remain the same -->
             </div>
         </div>
         
-        <!-- Load More Button -->
-        <div id="loadMoreContainer" style="text-align: center; margin-top: 3rem; display: none;">
+        <!-- Load More Button - UPDATED with proper spacing -->
+        <div id="loadMoreContainer" style="text-align: center; margin: 3rem 0 120px 0; padding-bottom: 20px; display: none;">
             <button id="loadMoreBtn" style="padding: 1rem 2.5rem; background: var(--primary-red); color: white; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 1rem;">
                 <i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem; display: none;"></i>
                 Load More Products
@@ -3805,6 +3800,8 @@
         }
         
         function addToCart(product) {
+            console.log('Adding to cart:', product);
+            
             // Check if product already exists in cart
             const existingItemIndex = cart.findIndex(item => item.id === product.id);
             
@@ -3812,15 +3809,18 @@
                 // Increment quantity
                 cart[existingItemIndex].quantity += 1;
             } else {
-                // Add new item
-                cart.push({
+                // Add new item with proper structure
+                const cartItem = {
                     id: product.id || Date.now().toString(),
                     name: product.name,
-                    price: product.basePrice,
-                    image: product.images ? product.images[0] : product.image,
-                    category: product.category || product.collectionName,
+                    price: product.basePrice || product.price,
+                    image: product.images ? product.images[0] : (product.image || ''),
+                    category: product.category || product.collectionName || 'general',
                     quantity: 1
-                });
+                };
+                
+                console.log('Adding new item:', cartItem);
+                cart.push(cartItem);
             }
             
             saveCart();
@@ -3878,13 +3878,15 @@
                 
                 cartSummaryContainer.innerHTML = '';
                 checkoutBtn.disabled = true;
+                checkoutBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Checkout via WhatsApp';
                 return;
             }
             
             // Calculate subtotal
-            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const subtotal = cart.reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0);
             const deliveryFee = selectedDeliveryOption ? selectedDeliveryOption.price : 0;
             const total = subtotal + deliveryFee;
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             
             // Display cart items
             cart.forEach(item => {
@@ -3917,8 +3919,8 @@
             // Update cart summary
             cartSummaryContainer.innerHTML = `
                 <div class="summary-row">
-                    <span>Subtotal (${cart.reduce((total, item) => total + item.quantity, 0)} items)</span>
-                    <span>KSh ${subtotal}</span>
+                    <span>Subtotal (${totalItems} ${totalItems === 1 ? 'item' : 'items'})</span>
+                    <span>KSh ${subtotal.toFixed(2)}</span>
                 </div>
                 <div class="summary-row">
                     <span>Delivery</span>
@@ -3926,12 +3928,13 @@
                 </div>
                 <div class="summary-row total">
                     <span>Total</span>
-                    <span>KSh ${total}</span>
+                    <span>KSh ${total.toFixed(2)}</span>
                 </div>
             `;
             
-            // Enable/disable checkout button
+            // Update checkout button
             checkoutBtn.disabled = deliveryFee === 0;
+            checkoutBtn.innerHTML = `<i class="fab fa-whatsapp"></i> Checkout (KSh ${total.toFixed(2)})`;
         }
         
         function initDeliveryOptions() {
@@ -3978,9 +3981,10 @@
             }
             
             // Calculate totals
-            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const subtotal = cart.reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0);
             const deliveryFee = selectedDeliveryOption.price;
             const total = subtotal + deliveryFee;
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             
             // Determine which WhatsApp number to use
             const whatsappNumber = currentFranchisee ? currentFranchisee.phone : mainWhatsAppNumber;
@@ -3988,24 +3992,35 @@
             
             // Build order message
             let message = `Hello ${contactName}! I would like to place an order:\n\n`;
+            message += `Order Summary:\n`;
+            message += `========================\n\n`;
             
             // Add items
             cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name} x${item.quantity} - KSh ${item.price * item.quantity}\n`;
+                const itemTotal = parseFloat(item.price) * item.quantity;
+                message += `${index + 1}. ${item.name}\n`;
+                message += `   Quantity: ${item.quantity}\n`;
+                message += `   Price: KSh ${item.price} each\n`;
+                message += `   Total: KSh ${itemTotal.toFixed(2)}\n\n`;
             });
             
             // Add summary
-            message += `\nSubtotal: KSh ${subtotal}\n`;
+            message += `========================\n`;
+            message += `Subtotal: KSh ${subtotal.toFixed(2)}\n`;
             message += `Delivery (${selectedDeliveryOption.name}): KSh ${deliveryFee}\n`;
-            message += `Total: KSh ${total}\n\n`;
+            message += `Total Amount: KSh ${total.toFixed(2)}\n\n`;
+            
+            // Add customer info
             message += `Delivery Option: ${selectedDeliveryOption.name}\n`;
             message += `Delivery Details: ${selectedDeliveryOption.description}\n\n`;
-            message += `Please confirm availability and provide payment details.`;
             
             // Add franchisee info
             if (currentFranchisee) {
-                message += `\n\n---\nOrder placed through ${currentFranchisee.name} (${currentFranchisee.location})`;
+                message += `---\nOrder placed through ${currentFranchisee.name}\n`;
+                message += `Location: ${currentFranchisee.location}\n`;
             }
+            
+            message += `---\nPlease confirm availability and provide payment details.`;
             
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
@@ -5008,93 +5023,67 @@
         
         // Create product card with cart functionality
         function createProductCard(product) {
-            try {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.style.animationDelay = `${Math.random() * 0.3}s`;
-                
-                // Get product images
-                const productImages = product.images || [product.image];
-                const mainImage = productImages[0];
-                
-                // Properly escape quotes and special characters
-                const escapedProductName = product.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
-                const imageUrlsString = productImages.join(',').replace(/'/g, "\\'");
-                
-                card.innerHTML = `
-                    <div class="product-image-wrapper">
-                        <img src="${mainImage}" alt="${product.name}" class="product-image" loading="lazy">
-                        <button class="view-image-btn" onclick="event.stopPropagation(); openFullImageView('${imageUrlsString}', '${escapedProductName}')">
-                            <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-badge">${product.collectionName || product.category}</div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-price">KSh ${product.basePrice}</div>
-                        <p class="product-description">${product.description || 'Premium quality product from DSOG STORES. Crafted with attention to detail.'}</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${JSON.stringify(product).replace(/'/g, "\\'")})">
-                                <i class="fas fa-cart-plus"></i> Add to Cart
-                            </button>
-                            <button class="whatsapp-btn" onclick="event.stopPropagation(); orderViaWhatsApp('${escapedProductName}', ${product.basePrice}, event)">
-                                <i class="fab fa-whatsapp"></i> Buy Now
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                // Add click event to open modal
-                card.addEventListener('click', function(e) {
-                    // Only open modal if click is not on buttons
-                    if (!e.target.closest('.add-to-cart-btn') && 
-                        !e.target.closest('.whatsapp-btn') &&
-                        !e.target.closest('.view-image-btn') &&
-                        !e.target.matches('.add-to-cart-btn') &&
-                        !e.target.matches('.whatsapp-btn') &&
-                        !e.target.matches('.view-image-btn') &&
-                        !e.target.closest('.fa-cart-plus') &&
-                        !e.target.closest('.fa-whatsapp') &&
-                        !e.target.closest('.fa-expand')) {
-                        openModal(product);
-                    }
-                });
-                
-                // Lazy load other images
-                if (productImages.length > 1) {
-                    productImages.slice(1).forEach(img => {
-                        const imgElement = new Image();
-                        imgElement.src = img;
-                    });
-                }
-                
-                return card;
-            } catch (error) {
-                console.error('Error creating product card:', error, product);
-                // Return a simple card as fallback
-                const fallbackCard = document.createElement('div');
-                fallbackCard.className = 'product-card';
-                fallbackCard.innerHTML = `
-                    <div class="product-image-wrapper">
-                        <img src="${product.image || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'}" alt="${product.name}" class="product-image" loading="lazy">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-badge">${product.category || 'Product'}</div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-price">KSh ${product.basePrice}</div>
-                        <div class="product-actions">
-                            <button class="add-to-cart-btn" onclick="addToCart(${JSON.stringify(product).replace(/'/g, "\\'")})">
-                                <i class="fas fa-cart-plus"></i> Add to Cart
-                            </button>
-                            <button class="whatsapp-btn" onclick="orderViaWhatsApp('${product.name}', ${product.basePrice})">
-                                <i class="fab fa-whatsapp"></i> Buy Now
-                            </button>
-                        </div>
-                    </div>
-                `;
-                return fallbackCard;
+    try {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.style.animationDelay = `${Math.random() * 0.3}s`;
+        
+        // Get product images
+        const productImages = product.images || [product.image];
+        const mainImage = productImages[0];
+        
+        // Create a safe product object for addToCart
+        const safeProduct = {
+            id: product.id || 'product_' + Date.now(),
+            name: product.name,
+            basePrice: product.basePrice || product.price,
+            image: mainImage,
+            category: product.category || product.collectionName || 'general',
+            collectionName: product.collectionName || product.category || 'general'
+        };
+        
+        // Convert to string and escape quotes
+        const productJson = JSON.stringify(safeProduct).replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+        
+        card.innerHTML = `
+            <div class="product-image-wrapper">
+                <img src="${mainImage}" alt="${product.name}" class="product-image" loading="lazy">
+                <button class="view-image-btn" onclick="event.stopPropagation(); openFullImageView('${productImages.join(',')}', '${product.name.replace(/'/g, "\\'")}')">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <div class="product-badge">${product.collectionName || product.category}</div>
+                <h3 class="product-title">${product.name}</h3>
+                <div class="product-price">KSh ${product.basePrice || product.price}</div>
+                <p class="product-description">${product.description || 'Premium quality product from DSOG STORES.'}</p>
+                <div class="product-actions">
+                    <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${JSON.stringify(safeProduct)})">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                    <button class="whatsapp-btn" onclick="event.stopPropagation(); orderViaWhatsApp('${product.name.replace(/'/g, "\\'")}', ${product.basePrice || product.price}, event)">
+                        <i class="fab fa-whatsapp"></i> Buy Now
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Add click event to open modal
+        card.addEventListener('click', function(e) {
+            if (!e.target.closest('.add-to-cart-btn') && 
+                !e.target.closest('.whatsapp-btn') &&
+                !e.target.closest('.view-image-btn')) {
+                openModal(product);
             }
-        }
+        });
+        
+        return card;
+    } catch (error) {
+        console.error('Error creating product card:', error);
+        // Return fallback card
+        return createFallbackCard(product);
+    }
+}
         
         // Fallback sample products
         function loadSampleProducts() {
@@ -5611,7 +5600,6 @@
         // Initialize scroll behavior
         function initScrollBehavior() {
             let ticking = false;
-            let lastScrollTime = Date.now();
             
             window.addEventListener('scroll', function() {
                 if (!ticking) {
@@ -5623,50 +5611,39 @@
                 }
             });
             
-            // Show nav on page load if user is at top
+            // Show nav on page load
             setTimeout(() => {
-                if (window.scrollY < 100) {
-                    showBottomNav();
-                }
-            }, 1000);
+                showBottomNav();
+            }, 1500);
         }
         
         function handleScroll() {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             const scrollDelta = currentScroll - lastScrollTop;
-            const scrollSpeed = Math.abs(scrollDelta);
-            const now = Date.now();
             
             // Update scroll direction
-            if (scrollDelta > 0) {
-                scrollDirection = 'down';
-            } else if (scrollDelta < 0) {
-                scrollDirection = 'up';
-            }
+            scrollDirection = scrollDelta > 0 ? 'down' : 'up';
             
-            // Hide nav on fast scrolling
-            if (scrollSpeed > 30 && scrollDirection === 'down' && currentScroll > 100) {
-                hideBottomNav();
-            }
-            
-            // Show nav on scroll up or when reaching bottom
-            if (scrollDirection === 'up' && !isBottomNavForced) {
-                showBottomNav();
-            }
-            
-            // Show nav when near bottom of page
-            const scrollBottom = document.documentElement.scrollHeight - window.innerHeight - currentScroll;
-            if (scrollBottom < 100) {
-                showBottomNav();
-            }
-            
-            // Auto-hide nav after inactivity
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                if (!isBottomNavForced && scrollDirection === 'down' && currentScroll > 200) {
+            // Hide nav on fast scrolling down
+            if (scrollDirection === 'down' && Math.abs(scrollDelta) > 10 && currentScroll > 200) {
+                if (!isBottomNavForced) {
                     hideBottomNav();
                 }
-            }, 2000);
+            }
+            
+            // Show nav on scroll up
+            if (scrollDirection === 'up' && Math.abs(scrollDelta) > 5) {
+                showBottomNav();
+            }
+            
+            // Show nav when near bottom (to see Load More button)
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollBottom = documentHeight - (currentScroll + windowHeight);
+            
+            if (scrollBottom < 150) {
+                showBottomNav();
+            }
             
             lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
         }
