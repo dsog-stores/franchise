@@ -4249,11 +4249,6 @@
             message += `\n---\nOrder placed through ${currentFranchisee.name} (${currentFranchisee.location})`;
         }
         
-        message += `\n\n💳 *Payment Instructions:*\n`;
-        message += `1. Please confirm order availability\n`;
-        message += `2. Payment details will be shared via WhatsApp\n`;
-        message += `3. Delivery will be arranged after payment confirmation\n`;
-        
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
         
