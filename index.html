@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=1.0, user-scalable=no">
     
     <!-- App Version -->
-    <meta name="app-version" content="2.3.0">
+    <meta name="app-version" content="2.4.0">
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#B22222">
@@ -15,7 +15,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="DSOG STORES">
     <meta name="msapplication-TileColor" content="#B22222">
-    <meta name="msapplication-starturl" content="/?v=2.3.0">
+    <meta name="msapplication-starturl" content="/?v=2.4.0">
     
     <!-- Open Graph Meta Tags for Sharing -->
     <meta property="og:title" content="DSOG STORES | Luxury Fashion Store">
@@ -91,10 +91,10 @@
             overflow-x: hidden;
         }
         
-        /* Enhanced Search Functionality */
+        /* FIXED: Enhanced Search Functionality with Better Positioning */
         .hero-search-container {
             position: absolute;
-            bottom: 60px;
+            bottom: 40px; /* Moved up for better visibility */
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
@@ -233,27 +233,28 @@
             transform: scale(0.95);
         }
         
-        /* Search Suggestions Dropdown */
+        /* FIXED: Search Suggestions Dropdown - Positioned above search bar */
         .search-suggestions {
             position: absolute;
-            top: calc(100% + 10px);
+            bottom: calc(100% + 10px); /* Position above search bar */
             left: 0;
             right: 0;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25),
-                        0 10px 25px rgba(178, 34, 34, 0.15);
+            box-shadow: 0 -25px 50px rgba(0, 0, 0, 0.25),
+                        0 -10px 25px rgba(178, 34, 34, 0.15);
             border: 2px solid rgba(212, 175, 55, 0.3);
             padding: 15px;
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-10px);
+            transform: translateY(10px);
             transition: var(--transition);
             max-height: 400px;
             overflow-y: auto;
+            transform-origin: bottom center;
         }
         
         .search-suggestions.visible {
@@ -1143,24 +1144,24 @@
         .product-image-wrapper {
             position: relative;
             width: 100%;
-            height: 350px; /* Increased from 280px */
+            height: 350px;
             overflow: hidden;
             background: var(--bg-secondary);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0; /* Removed padding for larger images */
+            padding: 0;
         }
         
         .product-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Changed from contain to cover for better image usage */
+            object-fit: cover;
             transition: transform 0.6s ease;
         }
         
         .product-card:hover .product-image {
-            transform: scale(1.08); /* Increased scale for better hover effect */
+            transform: scale(1.08);
         }
         
         .view-image-btn {
@@ -1217,12 +1218,12 @@
         }
         
         .product-title {
-            font-size: 1.2rem; /* Increased from 1.1rem */
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.8rem;
             color: var(--text-primary);
             line-height: 1.4;
-            height: 3.4em; /* Fixed height for consistent layout */
+            height: 3.4em;
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -1230,20 +1231,10 @@
         }
         
         .product-price {
-            font-size: 1.5rem; /* Increased from 1.25rem */
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-red);
             margin-bottom: 1rem;
-        }
-        
-        /* REMOVED: Product description from cards */
-        .product-description {
-            display: none; /* Hide description on cards */
-        }
-        
-        /* REMOVED: Product actions (Add to Cart & WhatsApp buttons) from cards */
-        .product-actions {
-            display: none; /* Hide action buttons on cards */
         }
         
         /* Collections Section */
@@ -2767,7 +2758,7 @@
         
         .skeleton-image {
             width: 100%;
-            height: 350px; /* Updated to match new image height */
+            height: 350px;
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
         }
@@ -2809,108 +2800,27 @@
             }
         }
         
-        /* FIX: Better click handling */
-        .view-image-btn *,
-        .image-zoom-btn *,
-        .modal-share-btn *,
-        .modal-add-to-cart-btn *,
-        .chat-option-btn * {
-            pointer-events: none;
-        }
-        
-        /* Product Quick View Overlay */
-        .product-quick-view {
-            position: absolute;
+        /* NEW: Quick Loading Feedback */
+        .instant-feedback {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: var(--transition);
+            height: 4px;
+            background: transparent;
+            z-index: 9999;
             pointer-events: none;
         }
         
-        .product-card:hover .product-quick-view {
-            opacity: 1;
-            pointer-events: all;
+        .instant-feedback .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-gold));
+            width: 0%;
+            transition: width 0.3s ease;
         }
         
-        .quick-view-text {
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-top: 1rem;
-            text-align: center;
-            padding: 0 1rem;
-        }
-        
-        .quick-view-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            border: 3px solid var(--primary-gold);
-            animation: pulse 2s infinite;
-        }
-        
-        /* FIX: Ensure buttons are clickable on mobile */
-        @media (max-width: 768px) {
-            .view-image-btn,
-            .modal-share-btn,
-            .modal-add-to-cart-btn,
-            .image-control-btn,
-            .image-nav-btn {
-                min-height: 44px;
-                min-width: 44px;
-            }
-            
-            .chat-option-btn {
-                min-height: 44px;
-            }
-            
-            .bottom-nav {
-                bottom: 10px;
-                padding: 0.4rem;
-                max-width: calc(100vw - 20px);
-            }
-            
-            .nav-item {
-                padding: 0.5rem 0.6rem;
-                min-width: 55px;
-                max-width: 65px;
-            }
-            
-            .nav-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 1rem;
-            }
-            
-            .nav-label {
-                font-size: 0.6rem;
-            }
-            
-            .nav-toggle-btn {
-                width: 55px;
-                height: 55px;
-                bottom: 10px;
-            }
-            
-            .pwa-install-prompt {
-                bottom: 80px;
-                left: 10px;
-                right: 10px;
-            }
+        .instant-feedback.visible {
+            background: rgba(255, 255, 255, 0.1);
         }
         
         /* Mobile Responsive */
@@ -2938,7 +2848,7 @@
             }
             
             .hero-search-container {
-                bottom: 40px;
+                bottom: 30px; /* Adjusted for mobile */
                 width: 95%;
             }
             
@@ -2964,6 +2874,7 @@
             .search-suggestions {
                 border-radius: 15px;
                 padding: 12px;
+                max-height: 350px; /* Reduced for mobile */
             }
             
             .suggestion-item {
@@ -2978,21 +2889,13 @@
                 display: none;
             }
             
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 0.9rem;
-            }
-            
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
             
             .product-image-wrapper {
-                height: 250px; /* Adjusted for mobile */
+                height: 250px;
             }
             
             .product-info {
@@ -3082,7 +2985,7 @@
             }
             
             .hero-search-container {
-                bottom: 30px;
+                bottom: 25px; /* Adjusted for small mobile */
             }
             
             .search-input {
@@ -3124,7 +3027,7 @@
             }
             
             .product-image-wrapper {
-                height: 280px; /* Maintain good size on mobile */
+                height: 280px;
             }
             
             .modal-body {
@@ -3235,59 +3138,42 @@
     // App Update Manager
     class AppUpdateManager {
         constructor() {
-            this.currentVersion = '2.3.0';
+            this.currentVersion = '2.4.0';
             this.checkInterval = null;
-            
-            // Check if app is installed as PWA
             this.isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-            
             this.init();
         }
         
         init() {
-            // Check for updates immediately
             this.checkForUpdates();
-            
-            // Check every 5 minutes
             this.checkInterval = setInterval(() => this.checkForUpdates(), 5 * 60 * 1000);
             
-            // Listen for service worker messages
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.addEventListener('message', this.handleServiceWorkerMessage.bind(this));
             }
             
-            // Listen for online/offline events
             window.addEventListener('online', () => this.checkForUpdates());
-            
-            // Display update badge if needed
             this.checkStoredUpdate();
         }
         
         async checkForUpdates() {
             try {
-                // Fetch fresh manifest
                 const response = await fetch('/manifest.json?v=' + Date.now());
                 const manifest = await response.json();
-                
-                // Store current version from manifest
-                this.currentVersion = manifest.version || '2.3.0';
+                this.currentVersion = manifest.version || '2.4.0';
                 localStorage.setItem('dsog_app_version', this.currentVersion);
                 
-                // Check against stored version
-                const storedVersion = localStorage.getItem('dsog_previous_version') || '2.2.1';
+                const storedVersion = localStorage.getItem('dsog_previous_version') || '2.3.0';
                 
                 if (this.currentVersion !== storedVersion) {
-                    console.log(`App update available: ${storedVersion} → ${this.currentVersion}`);
                     this.showUpdateNotification(storedVersion, this.currentVersion);
                 }
-                
             } catch (error) {
                 console.error('Update check failed:', error);
             }
         }
         
         showUpdateNotification(oldVersion, newVersion) {
-            // Create update notification
             const notification = document.createElement('div');
             notification.id = 'app-update-notification';
             notification.innerHTML = `
@@ -3366,7 +3252,6 @@
                 </div>
             `;
             
-            // Add animation style
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes slideUp {
@@ -3382,13 +3267,11 @@
             `;
             document.head.appendChild(style);
             
-            // Remove existing notification
             const existing = document.getElementById('app-update-notification');
             if (existing) existing.remove();
             
             document.body.appendChild(notification);
             
-            // Auto-hide after 30 seconds
             setTimeout(() => {
                 if (document.getElementById('app-update-notification')) {
                     this.hideNotification();
@@ -3409,14 +3292,11 @@
             
             if ('serviceWorker' in navigator) {
                 try {
-                    // Update service worker
                     const registration = await navigator.serviceWorker.ready;
                     await registration.update();
                     
-                    // Show success message
                     this.showUpdateSuccess();
                     
-                    // Force reload after 2 seconds
                     setTimeout(() => {
                         localStorage.setItem('dsog_previous_version', this.currentVersion);
                         window.location.reload();
@@ -3427,7 +3307,6 @@
                     this.showUpdateError();
                 }
             } else {
-                // No service worker, just reload
                 localStorage.setItem('dsog_previous_version', this.currentVersion);
                 window.location.reload();
             }
@@ -3446,13 +3325,11 @@
             const previousVersion = localStorage.getItem('dsog_previous_version');
             
             if (storedVersion && previousVersion && storedVersion !== previousVersion) {
-                // Show persistent update badge
                 this.showUpdateBadge();
             }
         }
         
         showUpdateBadge() {
-            // Add update badge to your install button
             const installBtn = document.getElementById('installAppBtn');
             if (installBtn) {
                 const badge = document.createElement('span');
@@ -3472,7 +3349,6 @@
                 installBtn.style.position = 'relative';
                 installBtn.appendChild(badge);
                 
-                // Add pulse animation
                 const style = document.createElement('style');
                 style.textContent = `
                     @keyframes pulse {
@@ -3500,6 +3376,11 @@
     </script>
 </head>
 <body>
+    <!-- NEW: Quick Loading Feedback -->
+    <div class="instant-feedback" id="instantFeedback">
+        <div class="progress-bar" id="instantProgressBar"></div>
+    </div>
+
     <!-- Enhanced Header with DSOG Theme -->
     <header>
         <div class="header-content">
@@ -3581,7 +3462,7 @@
             <!-- Slides will be populated by JavaScript -->
         </div>
         
-        <!-- Professional Search Functionality -->
+        <!-- FIXED: Professional Search Functionality with better positioning -->
         <div class="hero-search-container">
             <div class="search-wrapper">
                 <div class="search-input-container">
@@ -3607,7 +3488,7 @@
                     </div>
                 </div>
                 
-                <!-- Search Suggestions Dropdown -->
+                <!-- FIXED: Search Suggestions Dropdown - Positioned above -->
                 <div class="search-suggestions" id="searchSuggestions">
                     <div class="suggestion-header">
                         <i class="fas fa-lightbulb"></i>
@@ -3690,7 +3571,7 @@
                 </div>
             </div>
             
-            <!-- Products will be populated by JavaScript -->
+            <!-- Skeleton Loader -->
             <div class="skeleton-grid" id="skeletonLoader">
                 <div class="skeleton-card">
                     <div class="skeleton-image"></div>
@@ -3978,13 +3859,13 @@
     
     // Cart management
     let cart = JSON.parse(localStorage.getItem('dsog_cart')) || [];
-    let selectedDeliveryOption = 'standard'; // 'standard' or 'express'
+    let selectedDeliveryOption = 'standard';
     const deliveryRates = {
-        standard: 150,  // Within franchise location
-        express: 300    // Outside franchise location
+        standard: 150,
+        express: 300
     };
     
-    // UPDATED: Hero slides data - NO OVERLAY TEXT for clear ads
+    // Hero slides data - NO OVERLAY TEXT for clear ads
     const heroSlides = [
         {
             image: 'https://i.postimg.cc/nhpfy6qX/Red_and_White_Modern_Sport_Shoes_Fashion_Instagram_Post.webp'
@@ -4027,11 +3908,6 @@
             link: 'gifts.html'
         }
     ];
-    
-    // PWA variables
-    let deferredPrompt = null;
-    let isAppInstalled = false;
-    let isInstallPromptShown = false;
     
     // Product management variables
     let allProducts = [];
@@ -4077,9 +3953,12 @@
     let scrollDirection = 'down';
     let scrollStartPos = 0;
 
+    // NEW: Quick loading feedback variables
+    let instantFeedbackShown = false;
+
     // Initialize the page
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('🚀 DSOG STORES App - Home Page v2.3.0');
+        console.log('🚀 DSOG STORES App - Home Page v2.4.0');
         
         // Initialize App Update Manager
         window.appUpdateManager = new AppUpdateManager();
@@ -4106,10 +3985,10 @@
         // Update cart badge
         updateCartBadge();
         
-        // UPDATED: Show loading indicator immediately
-        showProductLoading();
+        // Show instant loading feedback
+        showInstantFeedback();
         
-        // Load products with optimized loading from URL parameters
+        // Load products with optimized loading
         setTimeout(() => {
             loadFeaturedProducts();
         }, 500);
@@ -4121,6 +4000,40 @@
             }
         });
     });
+
+    // NEW: Quick loading feedback functions
+    function showInstantFeedback() {
+        const feedbackElement = document.getElementById('instantFeedback');
+        const progressBar = document.getElementById('instantProgressBar');
+        
+        if (feedbackElement && progressBar) {
+            feedbackElement.classList.add('visible');
+            progressBar.style.width = '30%';
+            instantFeedbackShown = true;
+        }
+    }
+    
+    function updateInstantFeedback(progress) {
+        const progressBar = document.getElementById('instantProgressBar');
+        if (progressBar) {
+            progressBar.style.width = progress + '%';
+        }
+    }
+    
+    function hideInstantFeedback() {
+        const feedbackElement = document.getElementById('instantFeedback');
+        const progressBar = document.getElementById('instantProgressBar');
+        
+        if (feedbackElement && progressBar) {
+            progressBar.style.width = '100%';
+            
+            setTimeout(() => {
+                feedbackElement.classList.remove('visible');
+                progressBar.style.width = '0%';
+                instantFeedbackShown = false;
+            }, 500);
+        }
+    }
 
     // UPDATED: Enhanced Product loading indicator functions
     function showProductLoading() {
@@ -4137,8 +4050,14 @@
         if (skeletonLoader) {
             skeletonLoader.style.display = 'grid';
         }
-        updateLoadingProgress(0);
+        
+        updateLoadingProgress(10);
         updateLoadingCount(0, '...');
+        
+        // Show instant feedback
+        if (!instantFeedbackShown) {
+            showInstantFeedback();
+        }
     }
     
     function hideProductLoading() {
@@ -4151,6 +4070,9 @@
         if (skeletonLoader) {
             skeletonLoader.style.display = 'none';
         }
+        
+        // Hide instant feedback
+        hideInstantFeedback();
     }
     
     function showProductError() {
@@ -4162,6 +4084,9 @@
         if (errorElement) {
             errorElement.classList.add('visible');
         }
+        
+        // Hide instant feedback
+        hideInstantFeedback();
     }
     
     function hideProductError() {
@@ -4184,7 +4109,6 @@
             countElement.textContent = `${count} products loaded`;
             loadedElement.classList.add('visible');
             
-            // Hide after 3 seconds
             setTimeout(() => {
                 loadedElement.classList.remove('visible');
             }, 3000);
@@ -4196,6 +4120,9 @@
         if (progressBar) {
             progressBar.style.width = progress + '%';
         }
+        
+        // Update instant feedback as well
+        updateInstantFeedback(progress);
     }
     
     function updateLoadingCount(count, total) {
@@ -4222,7 +4149,6 @@
             }
         });
         
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && cartModal.classList.contains('active')) {
                 closeCartModal();
@@ -4239,7 +4165,6 @@
             }
         });
         
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && checkoutModal.classList.contains('active')) {
                 closeCheckoutModal();
@@ -4259,7 +4184,7 @@
         }
     }
     
-    // Enhanced add to cart function with visual feedback
+    // UPDATED: Enhanced add to cart function with better error handling
     window.addToCartSafe = function(product, buttonElement = null) {
         try {
             console.log('addToCartSafe called with:', product);
@@ -4269,7 +4194,7 @@
                 id: product.id || 'prod_' + Date.now() + Math.random().toString(36).substr(2, 9),
                 name: product.name || 'Unnamed Product',
                 price: product.basePrice || product.price || 0,
-                image: product.image || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: product.image || product.images?.[0] || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
                 quantity: 1,
                 category: product.category || product.collectionName || 'General'
             };
@@ -4285,15 +4210,12 @@
         try {
             console.log('addToCart called with:', product);
             
-            // Check if product already exists in cart
             const existingItemIndex = cart.findIndex(item => item.id === product.id);
             
             if (existingItemIndex > -1) {
-                // Increase quantity if product already in cart
                 cart[existingItemIndex].quantity += 1;
                 console.log('Increased quantity for existing item:', cart[existingItemIndex]);
             } else {
-                // Add new item to cart
                 cart.push({
                     id: product.id,
                     name: product.name,
@@ -4305,14 +4227,11 @@
                 console.log('Added new item to cart:', cart[cart.length - 1]);
             }
             
-            // Save cart to localStorage
             localStorage.setItem('dsog_cart', JSON.stringify(cart));
             console.log('Cart saved to localStorage:', cart);
             
-            // Update cart badge
             updateCartBadge();
             
-            // Show visual feedback on button
             if (buttonElement) {
                 const originalText = buttonElement.innerHTML;
                 buttonElement.classList.add('added');
@@ -4324,10 +4243,8 @@
                 }, 2000);
             }
             
-            // Show notification
             showNotification(`Added ${product.name} to cart!`);
             
-            // Update cart display if modal is open
             if (document.getElementById('cartModal').classList.contains('active')) {
                 renderCart();
             }
@@ -4550,7 +4467,6 @@
         const customerAddress = document.getElementById('customerAddress').value.trim();
         const customerNotes = document.getElementById('customerNotes').value.trim();
         
-        // Validate inputs
         if (!customerName || !customerPhone || !customerAddress) {
             showNotification('Please fill in all required fields');
             return;
@@ -4558,7 +4474,6 @@
         
         const totals = calculateCartTotal();
         const whatsappNumber = currentFranchisee ? currentFranchisee.phone : mainWhatsAppNumber;
-        const contactName = currentFranchisee ? currentFranchisee.name : 'DSOG STORES';
         
         let message = `🚀 *NEW ORDER - DSOG STORES* 🚀\n\n`;
         message += `*Customer Details:*\n`;
@@ -4586,12 +4501,10 @@
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
         
-        // Clear cart after order
         cart = [];
         localStorage.setItem('dsog_cart', JSON.stringify(cart));
         updateCartBadge();
         
-        // Close modals and redirect
         closeCheckoutModal();
         showNotification('Order completed! Opening WhatsApp...');
         
@@ -4607,10 +4520,8 @@
         const clearSearchBtn = document.getElementById('clearSearchBtn');
         const searchSuggestions = document.getElementById('searchSuggestions');
         
-        // Input focus/blur events
         searchInput.addEventListener('focus', showSearchSuggestions);
         searchInput.addEventListener('blur', function() {
-            // Delay hiding to allow click events on suggestions
             setTimeout(() => {
                 if (!searchSuggestions.matches(':hover') && !searchInput.matches(':focus')) {
                     hideSearchSuggestions();
@@ -4618,30 +4529,25 @@
             }, 200);
         });
         
-        // Input typing with debounce
         searchInput.addEventListener('input', function() {
             currentSearchQuery = this.value.trim();
             updateClearButton();
             updateSearchProgress();
             
-            // Clear previous timeout
             if (searchTimeout) {
                 clearTimeout(searchTimeout);
             }
             
-            // Show suggestions if query is empty
             if (!currentSearchQuery) {
                 showPopularSearches();
                 return;
             }
             
-            // Debounce search
             searchTimeout = setTimeout(() => {
                 performSearch(currentSearchQuery);
             }, 300);
         });
         
-        // Enter key to search
         searchInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -4657,48 +4563,38 @@
             }
         });
         
-        // Search button click
         searchBtn.addEventListener('click', performFullSearch);
         
-        // Clear search button
         clearSearchBtn.addEventListener('click', clearSearch);
         
-        // Click outside to close suggestions
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.search-wrapper')) {
                 hideSearchSuggestions();
             }
         });
         
-        // Initialize with popular searches
         showPopularSearches();
     }
     
-    // Perform search with debounce
     function performSearch(query) {
         if (!query || query.length < 2) {
             showPopularSearches();
             return;
         }
         
-        // Show loading state
         updateSearchProgress(50);
         
-        // Simulate search (replace with actual search logic)
         searchResults = searchProducts(query);
         
-        // Update suggestions
         if (searchResults.length > 0) {
             showSearchResults();
         } else {
             showNoResults();
         }
         
-        // Complete progress
         updateSearchProgress(100);
     }
     
-    // Search products in memory
     function searchProducts(query) {
         const results = [];
         const searchTerm = query.toLowerCase();
@@ -4707,7 +4603,6 @@
             return results;
         }
         
-        // Search in product data
         allProducts.forEach(product => {
             const productName = product.name.toLowerCase();
             const productDesc = (product.description || '').toLowerCase();
@@ -4716,22 +4611,18 @@
             
             let score = 0;
             
-            // Name matches
             if (productName.includes(searchTerm)) {
                 score += 100;
             }
             
-            // Description matches
             if (productDesc.includes(searchTerm)) {
                 score += 50;
             }
             
-            // Category matches
             if (productCategory.includes(searchTerm) || productCollection.includes(searchTerm)) {
                 score += 30;
             }
             
-            // Partial matches
             if (productName.includes(searchTerm) || 
                 productName.split(' ').some(word => word.startsWith(searchTerm))) {
                 score += 20;
@@ -4746,13 +4637,11 @@
             }
         });
         
-        // Sort by search score
         results.sort((a, b) => b.searchScore - a.searchScore);
         
-        return results.slice(0, 8); // Limit to 8 results
+        return results.slice(0, 8);
     }
     
-    // Show search results in suggestions
     function showSearchResults() {
         const suggestionsList = document.getElementById('suggestionsList');
         const searchHints = document.getElementById('searchHints');
@@ -4764,7 +4653,6 @@
             suggestionItem.className = 'suggestion-item';
             suggestionItem.dataset.index = index;
             
-            // Highlight matched text
             const highlightedName = highlightMatch(result.name, result.matchedTerm);
             
             suggestionItem.innerHTML = `
@@ -4791,7 +4679,6 @@
             suggestionsList.appendChild(suggestionItem);
         });
         
-        // Show search hints
         const relatedTerms = getRelatedSearchTerms(currentSearchQuery);
         searchHints.innerHTML = '';
         
@@ -4809,7 +4696,6 @@
         showSearchSuggestions();
     }
     
-    // Show popular searches
     function showPopularSearches() {
         const suggestionsList = document.getElementById('suggestionsList');
         const searchHints = document.getElementById('searchHints');
@@ -4822,7 +4708,6 @@
             </div>
         `;
         
-        // Show popular search categories
         searchHints.innerHTML = '';
         popularSearches.forEach(term => {
             const hintElement = document.createElement('div');
@@ -4838,7 +4723,6 @@
         showSearchSuggestions();
     }
     
-    // Show no results message
     function showNoResults() {
         const suggestionsList = document.getElementById('suggestionsList');
         const searchHints = document.getElementById('searchHints');
@@ -4851,7 +4735,6 @@
             </div>
         `;
         
-        // Show alternative search terms
         const alternatives = getAlternativeSearchTerms(currentSearchQuery);
         searchHints.innerHTML = '';
         
@@ -4869,7 +4752,6 @@
         showSearchSuggestions();
     }
     
-    // Highlight matching text
     function highlightMatch(text, query) {
         if (!query) return text;
         
@@ -4877,7 +4759,6 @@
         return text.replace(regex, '<span class="search-match">$1</span>');
     }
     
-    // Get related search terms
     function getRelatedSearchTerms(query) {
         const related = [];
         
@@ -4899,7 +4780,6 @@
         return related.slice(0, 5);
     }
     
-    // Get alternative search terms
     function getAlternativeSearchTerms(query) {
         const alternatives = [];
         const queryWords = query.toLowerCase().split(' ');
@@ -4912,7 +4792,6 @@
             }
         });
         
-        // Add general categories if needed
         if (alternatives.length < 3) {
             searchCategories.forEach(category => {
                 if (!alternatives.includes(category) && alternatives.length < 5) {
@@ -4924,15 +4803,12 @@
         return alternatives.slice(0, 5);
     }
     
-    // Navigate suggestions with arrow keys
     function navigateSuggestions(direction) {
         const suggestions = document.querySelectorAll('.suggestion-item');
         if (suggestions.length === 0) return;
         
-        // Remove active class from all suggestions
         suggestions.forEach(item => item.classList.remove('active'));
         
-        // Calculate new index
         activeSuggestionIndex += direction;
         
         if (activeSuggestionIndex < 0) {
@@ -4941,17 +4817,14 @@
             activeSuggestionIndex = 0;
         }
         
-        // Set active class
         suggestions[activeSuggestionIndex].classList.add('active');
         
-        // Scroll into view
         suggestions[activeSuggestionIndex].scrollIntoView({
             block: 'nearest',
             behavior: 'smooth'
         });
     }
     
-    // Set active suggestion
     function setActiveSuggestion(index) {
         const suggestions = document.querySelectorAll('.suggestion-item');
         suggestions.forEach(item => item.classList.remove('active'));
@@ -4962,7 +4835,6 @@
         }
     }
     
-    // Select suggestion
     function selectSuggestion(product) {
         openModal(product);
         hideSearchSuggestions();
@@ -4970,7 +4842,6 @@
         updateClearButton();
     }
     
-    // Perform full search
     function performFullSearch() {
         const query = document.getElementById('searchInput').value.trim();
         
@@ -4979,10 +4850,8 @@
             return;
         }
         
-        // Hide suggestions
         hideSearchSuggestions();
         
-        // Filter products based on search
         if (query.toLowerCase() === 'all') {
             filteredProducts = [...allProducts];
             currentFilter = 'all';
@@ -4991,20 +4860,16 @@
             currentFilter = 'search';
         }
         
-        // Update UI
         updateProductFilters();
         displayProducts(filteredProducts.slice(0, productsPerPage));
         
-        // Show search results count
         showNotification(`Found ${filteredProducts.length} products for "${query}"`);
         
-        // Scroll to products section
         document.getElementById('products').scrollIntoView({
             behavior: 'smooth'
         });
     }
     
-    // Update product filters based on search
     function updateProductFilters() {
         const filterButtons = document.querySelectorAll('.filter-btn');
         
@@ -5019,26 +4884,22 @@
         });
     }
     
-    // Show search suggestions
     function showSearchSuggestions() {
         const searchSuggestions = document.getElementById('searchSuggestions');
         searchSuggestions.classList.add('visible');
     }
     
-    // Hide search suggestions
     function hideSearchSuggestions() {
         const searchSuggestions = document.getElementById('searchSuggestions');
         searchSuggestions.classList.remove('visible');
         activeSuggestionIndex = -1;
     }
     
-    // Update search progress bar
     function updateSearchProgress(progress = 0) {
         const progressBar = document.getElementById('searchProgressBar');
         progressBar.style.width = progress + '%';
     }
     
-    // Update clear button visibility
     function updateClearButton() {
         const clearSearchBtn = document.getElementById('clearSearchBtn');
         const searchInput = document.getElementById('searchInput');
@@ -5050,7 +4911,6 @@
         }
     }
     
-    // Clear search
     function clearSearch() {
         const searchInput = document.getElementById('searchInput');
         searchInput.value = '';
@@ -5059,15 +4919,13 @@
         showPopularSearches();
         updateSearchProgress(0);
         
-        // Reset to all products
         currentFilter = 'all';
         filterProducts();
         updateProductFilters();
     }
     
-    // PWA Installation - WITHOUT MANIFEST GENERATION
+    // PWA Installation
     function initPWA() {
-        // Check if app is already installed
         if (window.matchMedia('(display-mode: standalone)').matches || 
             window.navigator.standalone === true) {
             isAppInstalled = true;
@@ -5075,13 +4933,11 @@
             hideInstallButton();
         }
         
-        // Listen for beforeinstallprompt event
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
             console.log('📱 PWA installation available');
             
-            // Show install button after a delay
             setTimeout(() => {
                 if (!isAppInstalled && !isInstallPromptShown) {
                     showInstallButton();
@@ -5089,7 +4945,6 @@
             }, 3000);
         });
         
-        // Listen for app installed event
         window.addEventListener('appinstalled', () => {
             isAppInstalled = true;
             deferredPrompt = null;
@@ -5099,10 +4954,7 @@
             showNotification('App installed successfully!');
         });
         
-        // Initialize install buttons
         initInstallButtons();
-        
-        // Register service worker
         registerServiceWorker();
     }
     
@@ -5112,7 +4964,6 @@
                 .then(registration => {
                     console.log('✅ Service Worker registered:', registration.scope);
                     
-                    // Check for updates
                     registration.addEventListener('updatefound', () => {
                         console.log('🔄 Service Worker update found');
                         const newWorker = registration.installing;
@@ -5120,9 +4971,8 @@
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                                 console.log('🔄 New content is available; please refresh.');
-                                // Show update notification
                                 window.appUpdateManager.showUpdateNotification(
-                                    localStorage.getItem('dsog_app_version') || '2.3.0',
+                                    localStorage.getItem('dsog_app_version') || '2.4.0',
                                     'New version'
                                 );
                             }
@@ -5232,7 +5082,6 @@
             currentFranchisee = franchisees[franchiseeCode];
             console.log(`🎯 Franchisee: ${currentFranchisee.name}`);
             
-            // Save to localStorage for future visits
             localStorage.setItem('dsog_franchisee', JSON.stringify({
                 code: franchiseeCode,
                 name: currentFranchisee.name,
@@ -5241,7 +5090,6 @@
                 timestamp: new Date().toISOString()
             }));
         } else {
-            // Check if franchisee was previously set
             const savedFranchisee = localStorage.getItem('dsog_franchisee');
             if (savedFranchisee) {
                 const franchiseeData = JSON.parse(savedFranchisee);
@@ -5272,14 +5120,12 @@
             isMobileMenuOpen = !isMobileMenuOpen;
             
             if (isMobileMenuOpen) {
-                // Open menu
                 mobileMenu.classList.add('active');
                 menuBackdrop.classList.add('active');
                 hamburgerBtn.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 hideBottomNav();
             } else {
-                // Close menu
                 mobileMenu.classList.remove('active');
                 menuBackdrop.classList.remove('active');
                 hamburgerBtn.classList.remove('active');
@@ -5287,22 +5133,17 @@
             }
         }
         
-        // Hamburger button click
         hamburgerBtn.addEventListener('click', toggleMobileMenu);
         
-        // Close button click
         closeMenu.addEventListener('click', toggleMobileMenu);
         
-        // Backdrop click
         menuBackdrop.addEventListener('click', toggleMobileMenu);
         
-        // Close menu when clicking on links
         const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', toggleMobileMenu);
         });
         
-        // Close menu with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && isMobileMenuOpen) {
                 toggleMobileMenu();
@@ -5310,7 +5151,6 @@
         });
     }
     
-    // Make closeMobileMenu available globally
     window.closeMobileMenu = function() {
         const mobileMenu = document.getElementById('mobileMenu');
         const menuBackdrop = document.getElementById('menuBackdrop');
@@ -5323,14 +5163,12 @@
         isMobileMenuOpen = false;
     };
 
-    // UPDATED: DSOG Hero Slideshow - NO OVERLAY for clear ads
+    // UPDATED: DSOG Hero Slideshow
     function initHeroSlideshow() {
         const slidesContainer = document.getElementById('heroSlides');
         const dotsContainer = document.getElementById('heroDots');
         
-        // Create slides and dots
         heroSlides.forEach((slide, index) => {
-            // Create slide
             const slideElement = document.createElement('div');
             slideElement.className = `hero-slide ${index === 0 ? 'active' : ''}`;
             slideElement.innerHTML = `
@@ -5338,14 +5176,12 @@
             `;
             slidesContainer.appendChild(slideElement);
             
-            // Create dot
             const dot = document.createElement('div');
             dot.className = `dot ${index === 0 ? 'active' : ''}`;
             dot.addEventListener('click', () => showSlide(index));
             dotsContainer.appendChild(dot);
         });
         
-        // Auto-advance slides
         let currentSlide = 0;
         setInterval(() => {
             currentSlide = (currentSlide + 1) % heroSlides.length;
@@ -5354,13 +5190,11 @@
     }
     
     function showSlide(index) {
-        // Update slides
         const slides = document.querySelectorAll('.hero-slide');
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
         });
         
-        // Update dots
         const dots = document.querySelectorAll('.dot');
         dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === index);
@@ -5393,17 +5227,13 @@
         
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Remove active class from all buttons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 
-                // Add active class to clicked button
                 this.classList.add('active');
                 
-                // Update current filter
                 currentFilter = this.dataset.filter;
                 currentPage = 1;
                 
-                // Filter products
                 filterProducts();
             });
         });
@@ -5419,10 +5249,8 @@
             );
         }
         
-        // Display filtered products
         displayProducts(filteredProducts.slice(0, productsPerPage));
         
-        // Show/hide load more button
         const loadMoreContainer = document.getElementById('loadMoreContainer');
         if (filteredProducts.length > productsPerPage) {
             loadMoreContainer.style.display = 'block';
@@ -5431,7 +5259,7 @@
         }
     }
     
-    // UPDATED: Load featured products with optimized loading from URL
+    // UPDATED: Load featured products with optimized loading
     async function loadFeaturedProducts() {
         if (isLoadingProducts) return;
         
@@ -5443,8 +5271,9 @@
         try {
             console.log('📦 Loading featured products...');
             
-            // Show loading state
-            updateLoadingProgress(10);
+            // Show instant feedback
+            updateInstantFeedback(30);
+            updateLoadingProgress(20);
             updateLoadingCount(0, '...');
             
             // Check for URL parameters to optimize loading
@@ -5453,7 +5282,6 @@
             const searchParam = urlParams.get('search');
             const productIdParam = urlParams.get('product');
             
-            // Load products based on URL parameters
             let products = [];
             
             if (collectionParam) {
@@ -5461,7 +5289,6 @@
                 products = await fetchCollectionProducts(collectionParam);
                 currentFilter = collectionParam;
                 
-                // Update active filter button
                 const filterButtons = document.querySelectorAll('.filter-btn');
                 filterButtons.forEach(btn => {
                     btn.classList.remove('active');
@@ -5470,7 +5297,6 @@
                     }
                 });
                 
-                // Show notification
                 showNotification(`Loaded ${collectionParam} collection`);
             } else if (searchParam) {
                 // Set search input value
@@ -5486,6 +5312,10 @@
                 allProducts = products;
                 totalProductsCount = products.length;
                 
+                // Update loading progress
+                updateInstantFeedback(70);
+                updateLoadingProgress(60);
+                
                 // Filter and display products
                 filterProducts();
                 
@@ -5499,7 +5329,6 @@
                 if (productIdParam) {
                     const targetProduct = products.find(p => p.id === productIdParam);
                     if (targetProduct) {
-                        // Scroll to products section and open modal
                         setTimeout(() => {
                             document.getElementById('products').scrollIntoView({
                                 behavior: 'smooth'
@@ -5510,6 +5339,11 @@
                         }, 1000);
                     }
                 }
+                
+                // Complete loading
+                updateInstantFeedback(90);
+                updateLoadingProgress(100);
+                
             } else {
                 throw new Error('No products found');
             }
@@ -5530,9 +5364,8 @@
             loadMoreIcon.style.display = 'none';
             loadMoreBtn.disabled = false;
             
-            // Hide loading indicator
+            // Hide loading indicators
             hideProductLoading();
-            updateLoadingProgress(100);
             
             // Show products grid
             container.classList.add('loaded');
@@ -5547,10 +5380,10 @@
             
             if (result.success && result.data) {
                 // Update loading progress
-                updateLoadingProgress(50);
+                updateInstantFeedback(50);
+                updateLoadingProgress(40);
                 updateLoadingCount(result.data.length, result.data.length);
                 
-                // Add collection info to each product
                 const productsWithCollection = result.data.map(product => ({
                     ...product,
                     collectionName: collection,
@@ -5571,7 +5404,8 @@
         const allProducts = [];
         
         // Update progress
-        updateLoadingProgress(20);
+        updateInstantFeedback(40);
+        updateLoadingProgress(30);
         updateLoadingCount(0, '...');
         
         // Use Promise.all to fetch all collections in parallel
@@ -5582,11 +5416,11 @@
                 
                 if (result.success && result.data) {
                     // Update loading progress
-                    const progress = 20 + ((index + 1) / collections.length) * 60;
-                    updateLoadingProgress(Math.min(progress, 80));
+                    const progress = 30 + ((index + 1) / collections.length) * 50;
+                    updateInstantFeedback(30 + ((index + 1) / collections.length) * 60);
+                    updateLoadingProgress(progress);
                     updateLoadingCount(allProducts.length + result.data.length, '...');
                     
-                    // Add collection info to each product
                     const productsWithCollection = result.data.map(product => ({
                         ...product,
                         collectionName: collection,
@@ -5600,10 +5434,8 @@
             return [];
         });
         
-        // Wait for all promises to resolve
         const results = await Promise.all(promises);
         
-        // Flatten the results array
         results.forEach(products => {
             allProducts.push(...products);
         });
@@ -5622,7 +5454,6 @@
             currentPage++;
             loadedProductsCount += moreProducts.length;
             
-            // Hide load more button if no more products
             if (endIndex >= filteredProducts.length) {
                 document.getElementById('loadMoreContainer').style.display = 'none';
             }
@@ -5657,7 +5488,7 @@
                 } catch (error) {
                     console.error('Error displaying product:', error, product);
                 }
-            }, index * 50); // Stagger animation
+            }, index * 50);
         });
         
         loadedProductsCount = products.length;
@@ -5679,18 +5510,17 @@
         });
     }
     
-    // Create product card with optimized image loading - UPDATED VERSION (NO BUTTONS)
+    // Create product card with optimized image loading
     function createProductCard(product) {
         try {
             const card = document.createElement('div');
             card.className = 'product-card';
             card.style.animationDelay = `${Math.random() * 0.3}s`;
             
-            // Get product images
             const productImages = product.images || [product.image];
             const mainImage = productImages[0];
             
-            // Properly escape quotes and special characters in product name
+            // Properly escape product data
             const escapedProductName = product.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
             const imageUrlsString = productImages.join(',').replace(/'/g, "\\'");
             
@@ -5716,7 +5546,6 @@
             
             // Add click event to open modal
             card.addEventListener('click', function(e) {
-                // Only open modal if click is not on view image button or its children
                 if (!e.target.closest('.view-image-btn') &&
                     !e.target.matches('.view-image-btn') &&
                     !e.target.closest('.fa-expand')) {
@@ -5851,6 +5680,9 @@
         // Show products grid
         const container = document.getElementById('productsContainer');
         container.classList.add('loaded');
+        
+        // Hide instant feedback
+        hideInstantFeedback();
     }
     
     // Product Modal Functionality
@@ -5866,7 +5698,6 @@
             }
         });
         
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 closeModal();
@@ -5874,12 +5705,12 @@
         });
     }
     
+    // UPDATED: FIXED share product function
     function openModal(product) {
         try {
             const modal = document.getElementById('productModal');
             const modalBody = document.getElementById('modalBody');
             
-            // Get product images
             const productImages = product.images || [product.image];
             const escapedProductName = product.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
             const imageUrlsString = productImages.join(',').replace(/'/g, "\\'");
@@ -5893,11 +5724,12 @@
                 name: product.name,
                 basePrice: product.basePrice,
                 image: productImages[0],
-                category: product.category || product.collectionName
+                category: product.category || product.collectionName,
+                description: product.description || 'Premium quality product from DSOG STORES.'
             };
             
-            // Convert safeProduct to a string for the onclick attribute
-            const safeProductString = JSON.stringify(safeProduct).replace(/"/g, '&quot;');
+            // Convert to JSON string for the onclick attribute
+            const safeProductJSON = JSON.stringify(safeProduct);
             
             modalBody.innerHTML = `
                 <div class="modal-image-section">
@@ -5947,10 +5779,10 @@
                     </div>
                     
                     <div class="modal-actions">
-                        <button class="modal-add-to-cart-btn" onclick="addToCartSafe(${safeProductString}, this);">
+                        <button class="modal-add-to-cart-btn" onclick="window.addToCartSafe(${safeProductJSON.replace(/"/g, '&quot;')}, this);">
                             <i class="fas fa-cart-plus"></i> Add to Cart
                         </button>
-                        <button class="modal-share-btn" onclick="shareProduct('${product.name}', '${product.basePrice}', '${productImages[0]}', '${shareableUrl}')">
+                        <button class="modal-share-btn" onclick="shareProduct('${product.name.replace(/'/g, "\\'")}', ${product.basePrice}, '${productImages[0].replace(/'/g, "\\'")}', '${shareableUrl}')">
                             <i class="fas fa-share-alt"></i> Share Product
                         </button>
                     </div>
@@ -5970,12 +5802,10 @@
         const baseUrl = window.location.origin + window.location.pathname;
         const urlParams = new URLSearchParams();
         
-        // Add product ID if available
         if (product.id) {
             urlParams.set('product', product.id);
         }
         
-        // Add franchisee if available
         if (currentFranchisee) {
             const franchiseeCode = Object.keys(franchisees).find(key => franchisees[key].phone === currentFranchisee.phone);
             if (franchiseeCode) {
@@ -5983,13 +5813,12 @@
             }
         }
         
-        // Add product name for SEO
         urlParams.set('name', encodeURIComponent(product.name.toLowerCase().replace(/\s+/g, '-')));
         
         return `${baseUrl}?${urlParams.toString()}`;
     }
     
-    // Share product function
+    // UPDATED: FIXED Share product function
     async function shareProduct(productName, price, imageUrl, productUrl) {
         const shareData = {
             title: `${productName} - DSOG STORES`,
@@ -6010,7 +5839,7 @@
         } catch (error) {
             console.error('Error sharing:', error);
             
-            // Alternative fallback: Open share dialog
+            // Alternative fallback: Open WhatsApp share
             const fallbackUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareData.text + '\n\n' + shareData.url)}`;
             window.open(fallbackUrl, '_blank');
         }
@@ -6024,7 +5853,6 @@
             mainImage.src = imageSrc;
         }
         
-        // Update active thumbnail
         thumbnails.forEach(thumb => {
             thumb.classList.remove('active');
             if (parseInt(thumb.dataset.index) === index) {
@@ -6202,7 +6030,6 @@
     // Open full image view - FIXED VERSION
     window.openFullImageView = function(imageUrls, productName) {
         try {
-            // Ensure imageUrls is properly formatted
             const images = imageUrls.split(',').map(url => url.trim());
             
             currentImages = images;
@@ -6216,17 +6043,14 @@
             const fullImage = document.getElementById('fullImage');
             const imageCounter = document.getElementById('imageCounter');
             
-            // Load first image
             if (currentImages[0]) {
                 fullImage.src = currentImages[0];
                 fullImage.alt = productName;
                 imageCounter.textContent = `1 / ${currentImages.length}`;
                 
-                // Reset transform
                 fullImage.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
                 fullImage.style.transition = 'transform 0.3s ease';
                 
-                // Show modal
                 fullImageModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 hideBottomNav();
@@ -6260,13 +6084,11 @@
         const fullImage = document.getElementById('fullImage');
         const imageCounter = document.getElementById('imageCounter');
         
-        // Reset zoom and position for new image
         currentZoom = 1;
         currentRotation = 0;
         translateX = 0;
         translateY = 0;
         
-        // Update image
         if (currentImages[currentImageIndex]) {
             fullImage.src = currentImages[currentImageIndex];
             fullImage.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
@@ -6314,7 +6136,7 @@
         setTimeout(showBottomNav, 300);
     }
     
-    // Initialize scroll behavior - UPDATED VERSION
+    // Initialize scroll behavior
     function initScrollBehavior() {
         let ticking = false;
         let lastScrollTime = Date.now();
@@ -6336,15 +6158,13 @@
             }
         }, 1000);
         
-        // FIX: Check if load more button is visible behind bottom nav
+        // Check if load more button is visible behind bottom nav
         setInterval(() => {
             const loadMoreContainer = document.getElementById('loadMoreContainer');
             if (loadMoreContainer && loadMoreContainer.style.display !== 'none') {
                 const loadMoreRect = loadMoreContainer.getBoundingClientRect();
-                const bottomNav = document.getElementById('bottomNav');
                 
                 if (loadMoreRect.bottom > window.innerHeight - 100) {
-                    // Load more button is near bottom, hide bottom nav
                     hideBottomNav();
                 }
             }
@@ -6357,34 +6177,28 @@
         const scrollSpeed = Math.abs(scrollDelta);
         const now = Date.now();
         
-        // Update scroll direction
         if (scrollDelta > 0) {
             scrollDirection = 'down';
         } else if (scrollDelta < 0) {
             scrollDirection = 'up';
         }
         
-        // FIX: Hide nav when scrolling near bottom (where load more button is)
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
         const scrollBottom = documentHeight - windowHeight - currentScroll;
         
-        // If near bottom (where load more button would be), hide nav
         if (scrollBottom < 200 && scrollDirection === 'down') {
             hideBottomNav();
         }
         
-        // Hide nav on fast scrolling
         if (scrollSpeed > 30 && scrollDirection === 'down' && currentScroll > 100) {
             hideBottomNav();
         }
         
-        // Show nav on scroll up or when reaching bottom
         if (scrollDirection === 'up' && !isBottomNavForced) {
             showBottomNav();
         }
         
-        // Auto-hide nav after inactivity
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
             if (!isBottomNavForced && scrollDirection === 'down' && currentScroll > 200) {
@@ -6401,10 +6215,8 @@
         
         navItems.forEach(item => {
             item.addEventListener('click', function(e) {
-                // For gifts.html link, allow normal navigation
                 if (this.getAttribute('href') === 'gifts.html') {
                     setActiveNav(this);
-                    // Navigation will happen normally via the link
                     return;
                 }
                 
@@ -6419,16 +6231,13 @@
                             block: 'start'
                         });
                         
-                        // Update active state after scroll
                         setTimeout(() => {
                             setActiveNav(this);
                         }, 500);
                     }
                 } else if (this.getAttribute('href') === '#') {
                     e.preventDefault();
-                    // For cart button, already handled by onclick
                 } else {
-                    // For external links, just update active state
                     setActiveNav(this);
                 }
             });
@@ -6447,14 +6256,12 @@
                 this.classList.add('active');
                 isBottomNavForced = true;
                 
-                // Reset forced state after 3 seconds
                 setTimeout(() => {
                     isBottomNavForced = false;
                 }, 3000);
             }
         });
         
-        // Show toggle button when nav is hidden
         setInterval(() => {
             if (!isBottomNavVisible && window.scrollY > 100) {
                 navToggleBtn.classList.add('visible');
@@ -6512,7 +6319,6 @@
             }
         });
         
-        // Close chat when clicking outside
         document.addEventListener('click', function(e) {
             if (!chatContainer.contains(e.target) && !chatToggle.contains(e.target) && isChatOpen) {
                 chatContainer.classList.remove('active');
@@ -6574,7 +6380,6 @@
         addChatMessage(message, 'user');
         chatInput.value = '';
         
-        // Simulate bot response
         setTimeout(() => {
             handleBotResponse(message.toLowerCase());
         }, 1000);
@@ -6617,13 +6422,11 @@
     
     // Simple notification
     function showNotification(message) {
-        // Remove existing notification
         const existingNotification = document.querySelector('.notification');
         if (existingNotification) {
             existingNotification.remove();
         }
         
-        // Create new notification
         const notification = document.createElement('div');
         notification.className = 'notification';
         notification.textContent = message;
@@ -6646,7 +6449,6 @@
         
         document.body.appendChild(notification);
         
-        // Remove after 3 seconds
         setTimeout(() => {
             if (notification.parentNode) {
                 notification.remove();
@@ -6697,7 +6499,7 @@
         #loadMoreContainer {
             position: relative;
             z-index: 100 !important;
-            padding-bottom: 100px; /* Space for bottom nav */
+            padding-bottom: 100px;
         }
         
         /* Standalone app styles */
@@ -6760,6 +6562,8 @@
     // Export functions to global scope
     window.retryLoadingProducts = retryLoadingProducts;
     window.shareProduct = shareProduct;
+    window.openFullImageView = openFullImageView;
+    window.addToCartSafe = addToCartSafe;
 </script>
 </body>
 </html>
