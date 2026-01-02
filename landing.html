@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- App Version -->
-    <meta name="app-version" content="3.1.0">
+    <meta name="app-version" content="3.2.0">
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#B22222">
@@ -15,11 +15,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="DSOG Franchise">
     <meta name="msapplication-TileColor" content="#B22222">
-    <meta name="msapplication-starturl" content="/?v=3.1.0">
+    <meta name="msapplication-starturl" content="/?v=3.2.0">
     
     <!-- Updated Open Graph Meta Tags -->
     <meta property="og:title" content="DSOG Enterprise | Online Franchise Platform">
-    <meta property="og:description" content="Kenya's Premier Online Franchise Platform. Currently launching with Fashion - expanding to multiple verticals soon.">
+    <meta property="og:description" content="Start your online business with our proven franchise model. Currently featuring apparel and accessories.">
     <meta property="og:image" content="https://i.postimg.cc/CxNLzQgt/Untitled-design-3.webp">
     <meta property="og:url" content="https://dsogenterprise.com/franchise">
     <meta property="og:type" content="website">
@@ -29,7 +29,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- DSOG Theme Colors (Lightened) -->
+    <!-- DSOG Theme Colors -->
     <style>
         :root {
             --primary-red: #B22222;
@@ -41,29 +41,31 @@
             --dark-red: #8B0000;
             --light: #F8F9FA;
             --gray: #666666;
+            --light-gray: #888888;
             --white: #FFFFFF;
             --text-primary: #222222;
-            --text-secondary: #555555;
+            --text-secondary: #444444;
             --bg-primary: #ffffff;
-            --bg-secondary: #f5f5f5;
-            --border-color: #e8e8e8;
+            --bg-secondary: #f9f9f9;
+            --border-color: #eaeaea;
             --shadow-color: rgba(178, 34, 34, 0.08);
             --card-bg: #ffffff;
             --success: #25D366;
             --whatsapp-green: #25D366;
             --whatsapp-dark: #128C7E;
             --share-blue: #4285F4;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 12px rgba(178, 34, 34, 0.1);
-            --shadow-lg: 0 10px 25px rgba(178, 34, 34, 0.15);
+            --shadow-sm: 0 2px 12px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 30px rgba(178, 34, 34, 0.12);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 12px;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
         
@@ -72,118 +74,75 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            font-size: 15px;
+            font-weight: 400;
+        }
+        
+        /* Improved Typography */
+        h1 { font-size: 2.4rem; font-weight: 700; line-height: 1.2; }
+        h2 { font-size: 1.9rem; font-weight: 700; line-height: 1.3; }
+        h3 { font-size: 1.4rem; font-weight: 600; line-height: 1.4; }
+        h4 { font-size: 1.2rem; font-weight: 600; line-height: 1.4; }
+        p { font-size: 0.95rem; color: var(--text-secondary); }
+        
+        .lead {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
         }
         
         /* Platform Badge */
         .platform-badge {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary-gold), #FFD700);
-            color: var(--primary-black);
-            padding: 0.4rem 1.2rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
+            color: var(--white);
+            padding: 0.5rem 1.2rem;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
             margin-bottom: 1rem;
-            border: 2px solid var(--primary-red);
+            box-shadow: 0 3px 10px rgba(178, 34, 34, 0.2);
         }
         
-        /* Current Project Banner */
-        .current-project-banner {
-            background: linear-gradient(90deg, rgba(178, 34, 34, 0.1), rgba(212, 175, 55, 0.1));
-            border-left: 4px solid var(--primary-red);
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 10px 10px 0;
+        /* Current Focus Banner */
+        .focus-banner {
+            background: linear-gradient(90deg, rgba(178, 34, 34, 0.05), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(178, 34, 34, 0.1);
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.2rem;
+            backdrop-filter: blur(10px);
         }
         
-        .current-project-banner i {
+        .focus-banner i {
             color: var(--primary-red);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
+            flex-shrink: 0;
         }
         
-        /* Vertical Cards */
-        .vertical-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .vertical-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            border: 2px solid var(--border-color);
-            position: relative;
-        }
-        
-        .vertical-card.active {
-            border-color: var(--primary-red);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-5px);
-        }
-        
-        .vertical-card.active::before {
-            content: 'CURRENT PROJECT';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary-red);
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 15px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-        
-        .vertical-icon {
-            font-size: 2rem;
+        .focus-banner strong {
             color: var(--primary-red);
-            margin-bottom: 1rem;
-        }
-        
-        .vertical-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .vertical-card.coming-soon {
-            opacity: 0.7;
-        }
-        
-        .coming-soon-badge {
-            background: var(--gray);
-            color: white;
-            padding: 0.2rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            margin-top: 0.5rem;
-            display: inline-block;
+            font-weight: 600;
         }
         
         /* Header */
         header {
             background: var(--white);
-            padding: 1.2rem 1.5rem;
+            padding: 1rem 1.5rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-            border-bottom: 3px solid var(--primary-red);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            border-bottom: 2px solid var(--primary-red);
+            backdrop-filter: blur(10px);
         }
         
         .header-content {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -191,13 +150,13 @@
         }
         
         .logo {
-            height: 35px;
-            filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+            height: 32px;
+            filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2));
         }
         
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.8rem;
             align-items: center;
         }
         
@@ -207,8 +166,7 @@
             font-weight: 500;
             transition: var(--transition);
             font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             position: relative;
             padding: 0.4rem 0;
         }
@@ -244,77 +202,72 @@
             background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
             color: var(--white);
             border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
+            padding: 0.75rem 1.8rem;
+            border-radius: 25px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 12px rgba(178, 34, 34, 0.2);
         }
         
         .cta-button:hover {
-            background: var(--white);
-            color: var(--primary-red);
-            border-color: var(--primary-red);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(178, 34, 34, 0.3);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98)), url('https://images.unsplash.com/photo-1558769132-cb1f96d39da5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
             color: var(--text-primary);
-            padding: 6rem 1.5rem;
+            padding: 4rem 1.5rem;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
         
         .hero-content {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            animation: fadeInUp 1s ease;
+            animation: fadeInUp 0.8s ease;
         }
         
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
-        
-        .hero h1 span {
-            color: var(--primary-red);
+            margin-bottom: 1.2rem;
         }
         
         .hero .subtitle {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
         }
         
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            color: var(--text-secondary);
         }
         
         .hero-buttons {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.2rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 2rem;
         }
         
         .hero-buttons .cta-button {
-            min-width: 200px;
+            min-width: 180px;
         }
         
         .secondary-button {
@@ -328,34 +281,32 @@
             color: var(--white);
         }
         
-        /* Online Franchise Badge */
+        /* Online Badge */
         .online-badge {
             display: inline-block;
-            background: var(--primary-red);
-            color: var(--white);
-            padding: 0.5rem 1.5rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
+            background: var(--white);
+            color: var(--primary-red);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 2rem;
-            border: 2px solid var(--primary-gold);
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--primary-red);
         }
         
         /* Section Styling */
         section {
-            padding: 5rem 1.5rem;
-            max-width: 1400px;
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
         
         .section-header h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            color: var(--text-primary);
             margin-bottom: 1rem;
             position: relative;
             display: inline-block;
@@ -367,60 +318,68 @@
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
+            width: 60px;
+            height: 3px;
             background: var(--primary-red);
+            border-radius: 2px;
         }
         
         .section-header p {
-            color: var(--gray);
-            max-width: 700px;
+            max-width: 600px;
             margin: 1.5rem auto 0;
-            font-size: 1.1rem;
         }
         
         /* Platform Introduction */
         .platform-intro {
             text-align: center;
-            padding: 4rem 1.5rem;
+            padding: 3rem 1.5rem;
             background: var(--bg-secondary);
-            border-radius: 20px;
+            border-radius: var(--border-radius);
             margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
         }
         
-        .platform-intro h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
+        /* Category Tags */
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin: 2rem 0;
         }
         
-        .platform-intro h2 span {
+        .category-tag {
+            background: rgba(178, 34, 34, 0.08);
             color: var(--primary-red);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(178, 34, 34, 0.2);
+            transition: var(--transition);
         }
         
-        .platform-intro p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            color: var(--text-secondary);
+        .category-tag:hover {
+            background: rgba(178, 34, 34, 0.15);
+            transform: translateY(-2px);
         }
         
         /* Franchise Workflow */
         .workflow-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
         }
         
         .workflow-step {
             background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            padding: 2rem;
             text-align: center;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
-            border: 2px solid transparent;
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
             height: 100%;
@@ -430,35 +389,36 @@
         }
         
         .workflow-step:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(178, 34, 34, 0.3);
         }
         
         .step-number {
             position: absolute;
-            top: -15px;
-            left: -15px;
+            top: -12px;
+            left: -12px;
             background: var(--primary-red);
             color: var(--white);
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.3rem;
-            border: 3px solid var(--primary-gold);
+            font-size: 1.1rem;
+            border: 2px solid var(--white);
+            box-shadow: 0 3px 8px rgba(178, 34, 34, 0.3);
         }
         
         .step-icon {
-            font-size: 3rem;
+            font-size: 2.2rem;
             color: var(--primary-red);
-            margin-bottom: 1.5rem;
-            background: rgba(178, 34, 34, 0.1);
-            width: 80px;
-            height: 80px;
+            margin-bottom: 1.2rem;
+            background: rgba(178, 34, 34, 0.08);
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -468,72 +428,61 @@
         }
         
         .workflow-step h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
+            margin-bottom: 0.8rem;
         }
         
         .workflow-step p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
             flex-grow: 1;
         }
         
         /* Benefits Section */
         .benefits-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-top: 2.5rem;
         }
         
         .benefit-card {
             background: var(--card-bg);
-            border-radius: 10px;
-            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            padding: 2rem;
             text-align: left;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
-            border-left: 4px solid var(--primary-red);
+            border: 1px solid var(--border-color);
             height: 100%;
             display: flex;
             flex-direction: column;
         }
         
         .benefit-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-md);
+            border-color: rgba(178, 34, 34, 0.3);
         }
         
         .benefit-icon {
             color: var(--primary-red);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
         }
         
         .benefit-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .benefit-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            flex-grow: 1;
+            margin-bottom: 0.8rem;
         }
         
         /* Online Store Section */
         .online-store-section {
             background: var(--bg-secondary);
-            border-radius: 20px;
-            padding: 4rem 2rem;
+            border-radius: var(--border-radius);
+            padding: 3.5rem 2rem;
             text-align: center;
-            margin: 5rem auto;
-            max-width: 1200px;
+            margin: 4rem auto;
+            max-width: 1000px;
             position: relative;
+            border: 1px solid var(--border-color);
         }
         
         .online-store-section::before {
@@ -542,41 +491,44 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary-red), var(--primary-gold));
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
         }
         
         .online-store-section h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
+            margin-bottom: 1.2rem;
         }
         
         .online-store-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            max-width: 700px;
+            margin-bottom: 2rem;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            color: var(--text-secondary);
         }
         
         .online-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin-top: 2.5rem;
         }
         
         .online-feature {
             background: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 1.8rem;
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .online-feature:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
         }
         
         .online-feature i {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--primary-red);
             margin-bottom: 1rem;
         }
@@ -584,19 +536,19 @@
         /* Opportunities Section */
         .opportunities-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 2.5rem;
         }
         
         .opportunity-card {
             background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            padding: 2.2rem 2rem;
             text-align: center;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
-            border: 2px solid transparent;
+            border: 1px solid var(--border-color);
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -605,18 +557,18 @@
         }
         
         .opportunity-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(178, 34, 34, 0.3);
         }
         
         .opportunity-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--primary-red);
-            margin-bottom: 1.5rem;
-            background: rgba(178, 34, 34, 0.1);
-            width: 80px;
-            height: 80px;
+            margin-bottom: 1.2rem;
+            background: rgba(178, 34, 34, 0.08);
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -624,15 +576,10 @@
         }
         
         .opportunity-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
+            margin-bottom: 0.8rem;
         }
         
         .opportunity-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.7;
             margin-bottom: 1.5rem;
             flex-grow: 1;
         }
@@ -641,11 +588,11 @@
         .cta-section {
             background: linear-gradient(135deg, var(--primary-red) 0%, var(--secondary-red) 100%);
             color: var(--white);
-            padding: 6rem 1.5rem;
+            padding: 4.5rem 1.5rem;
             text-align: center;
-            border-radius: 20px;
-            margin: 5rem auto;
-            max-width: 1200px;
+            border-radius: var(--border-radius);
+            margin: 4rem auto;
+            max-width: 1000px;
             position: relative;
             overflow: hidden;
         }
@@ -656,32 +603,30 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary-gold), var(--white));
         }
         
         .cta-section h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 1.5rem;
             color: var(--white);
+            margin-bottom: 1.2rem;
         }
         
         .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            max-width: 700px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            opacity: 0.9;
         }
         
         /* Contact Info */
         .contact-info {
             display: flex;
             justify-content: center;
-            gap: 3rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
-            margin-top: 3rem;
+            margin-top: 2.5rem;
         }
         
         .contact-item {
@@ -689,32 +634,33 @@
             align-items: center;
             gap: 1rem;
             color: var(--white);
-            font-size: 1.1rem;
         }
         
         .contact-icon {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             color: var(--white);
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             flex-shrink: 0;
-            border: 2px solid var(--primary-gold);
+            border: 1px solid rgba(255,255,255,0.3);
         }
         
         /* Brands Section */
         .brands-section {
             background: var(--bg-secondary);
-            padding: 4rem 1.5rem;
+            padding: 3.5rem 1.5rem;
             text-align: center;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
         }
         
         .brands-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -728,24 +674,31 @@
         
         .brands-track {
             display: flex;
-            animation: scrollBrands 30s linear infinite;
+            animation: scrollBrands 40s linear infinite;
         }
         
         .brand-item {
             flex: 0 0 auto;
-            margin: 0 3rem;
+            margin: 0 2.5rem;
             text-align: center;
         }
         
         .brand-logo {
-            height: 60px;
-            margin-bottom: 1rem;
+            height: 50px;
+            margin-bottom: 0.8rem;
             object-fit: contain;
+            filter: grayscale(30%);
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .brand-item:hover .brand-logo {
+            filter: grayscale(0);
+            opacity: 1;
         }
         
         .brand-item h4 {
-            color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.9rem;
             margin-top: 0.5rem;
         }
         
@@ -758,36 +711,32 @@
             }
         }
         
-        .brands-scroll:hover .brands-track {
-            animation-play-state: paused;
-        }
-        
         /* Footer */
         footer {
             background: var(--secondary-black);
             color: var(--white);
-            padding: 4rem 1.5rem 2rem;
+            padding: 3.5rem 1.5rem 2rem;
         }
         
         .footer-content {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
         }
         
         .footer-logo {
-            height: 40px;
-            margin-bottom: 1.5rem;
+            height: 35px;
+            margin-bottom: 1.2rem;
         }
         
         .footer-section h3 {
             color: var(--primary-gold);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         
         .footer-section ul {
@@ -795,7 +744,9 @@
         }
         
         .footer-section ul li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.7rem;
+            font-size: 0.9rem;
+            color: var(--gray);
         }
         
         .footer-section ul li a {
@@ -806,44 +757,48 @@
         
         .footer-section ul li a:hover {
             color: var(--primary-red);
-            padding-left: 5px;
         }
         
         .copyright {
             text-align: center;
-            padding-top: 3rem;
-            margin-top: 3rem;
+            padding-top: 2.5rem;
+            margin-top: 2.5rem;
             border-top: 1px solid rgba(255,255,255,0.1);
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            h3 { font-size: 1.3rem; }
+            
             .nav-links {
                 display: none;
             }
             
             .hero {
-                padding: 4rem 1rem;
+                padding: 3rem 1rem;
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                margin-bottom: 1rem;
             }
             
             .hero .subtitle {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem;
             }
             
             .hero-buttons .cta-button {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
             }
             
             section {
@@ -854,10 +809,7 @@
             .benefits-container,
             .opportunities-container {
                 grid-template-columns: 1fr;
-            }
-            
-            .vertical-cards {
-                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
             }
             
             .contact-info {
@@ -870,47 +822,51 @@
             .cta-section,
             .online-store-section {
                 margin: 3rem 1rem;
-                padding: 4rem 1rem;
+                padding: 3.5rem 1.5rem;
             }
             
-            .brands-track {
-                animation: scrollBrandsMobile 20s linear infinite;
+            .focus-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1rem;
+                gap: 1rem;
             }
             
-            @keyframes scrollBrandsMobile {
-                0% {
-                    transform: translateX(0);
-                }
-                100% {
-                    transform: translateX(-100%);
-                }
+            .category-tags {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 0.5rem;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .category-tag {
+                flex-shrink: 0;
+                white-space: nowrap;
             }
         }
         
         @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.2rem; }
+            
             .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero .subtitle {
-                font-size: 1rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .section-header h2 {
                 font-size: 1.8rem;
             }
             
-            .workflow-step,
-            .opportunity-card {
-                padding: 2rem 1.5rem;
+            .hero .subtitle {
+                font-size: 0.95rem;
             }
             
-            .vertical-cards {
-                grid-template-columns: 1fr;
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .workflow-step,
+            .opportunity-card,
+            .benefit-card {
+                padding: 1.8rem 1.5rem;
             }
         }
         
@@ -918,7 +874,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -928,14 +884,22 @@
         
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
         .animate-on-scroll.animated {
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-red { color: var(--primary-red); }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
     </style>
 </head>
 <body>
@@ -945,7 +909,7 @@
             <img src="https://i.postimg.cc/kMZ1jTww/Untitled-design-4-removebg-preview.png" alt="DSOG Enterprise" class="logo">
             
             <nav class="nav-links">
-                <a href="#workflow" class="active">Workflow</a>
+                <a href="#workflow" class="active">How It Works</a>
                 <a href="#platform">Our Platform</a>
                 <a href="#benefits">Benefits</a>
                 <a href="#opportunities">Opportunities</a>
@@ -958,73 +922,71 @@
     <section class="hero">
         <div class="hero-content">
             <div class="platform-badge">
-                <i class="fas fa-layer-group"></i> MULTI-VERTICAL FRANCHISE PLATFORM
+                <i class="fas fa-store"></i> ONLINE BUSINESS PLATFORM
             </div>
             
-            <div class="online-badge">
-                <i class="fas fa-globe"></i> 100% ONLINE FRANCHISE SYSTEM
-            </div>
+            <h1>Start Your Online Business</h1>
+            <div class="subtitle">Proven Franchise Model • Complete Support System</div>
+            <p class="lead">Launch your own online store with our established system. We provide everything you need to start and grow your business, from inventory to delivery.</p>
             
-            <h1>DSOG <span>Online Franchise</span> Platform</h1>
-            <div class="subtitle">Currently Launching with Fashion · Expanding to Multiple Verticals</div>
-            <p>Kenya's premier online franchise platform. Start your digital business today with our proven e-commerce model. No physical store required - operate fully online with our comprehensive support system.</p>
-            
-            <div class="current-project-banner">
+            <div class="focus-banner">
                 <i class="fas fa-tshirt"></i>
                 <div>
-                    <strong>Current Launch Project:</strong> DSOG Fashion Franchise
-                    <br>
-                    <small>Next verticals coming soon: Home Goods, Electronics, Groceries, and more</small>
+                    <strong>Currently featuring apparel and accessories</strong>
+                    <div class="text-small">Clothing, shoes, and fashion items with more categories in development</div>
                 </div>
             </div>
             
+            <div class="category-tags">
+                <span class="category-tag">Clothing</span>
+                <span class="category-tag">Footwear</span>
+                <span class="category-tag">Accessories</span>
+                <span class="category-tag">Sports Wear</span>
+                <span class="category-tag">Kids Items</span>
+            </div>
+            
             <div class="hero-buttons">
-                <a href="#contact" class="cta-button">Apply for Franchise</a>
-                <a href="#workflow" class="cta-button secondary-button">Learn How It Works</a>
+                <a href="#contact" class="cta-button">Start Your Business</a>
+                <a href="#workflow" class="cta-button secondary-button">See How It Works</a>
             </div>
         </div>
     </section>
 
     <!-- Platform Introduction -->
     <section id="platform" class="platform-intro">
-        <h2>One Platform, <span>Multiple Opportunities</span></h2>
-        <p>DSOG Enterprise is building Kenya's first comprehensive online franchise platform. We're starting with fashion and will expand to other verticals, creating a diverse network of online businesses.</p>
+        <h2>Business Made Simple</h2>
+        <p class="lead">We've created a complete system for starting your online business. Focus on sales while we handle the complex parts.</p>
         
-        <div class="vertical-cards">
-            <div class="vertical-card active animate-on-scroll">
-                <div class="vertical-icon">
-                    <i class="fas fa-tshirt"></i>
+        <div class="online-badge">
+            <i class="fas fa-globe"></i> 100% ONLINE OPERATION
+        </div>
+        
+        <div class="workflow-container">
+            <div class="workflow-step animate-on-scroll">
+                <div class="step-number">1</div>
+                <div class="step-icon">
+                    <i class="fas fa-store"></i>
                 </div>
-                <h4>Fashion & Apparel</h4>
-                <p>Our current launch project - clothing, shoes, and accessories</p>
-                <div class="coming-soon-badge" style="background: var(--primary-red);">ACTIVE NOW</div>
+                <h3>Your Online Store</h3>
+                <p>Get a professional online store ready to sell. Customizable design, mobile responsive, and integrated with our system.</p>
             </div>
             
-            <div class="vertical-card coming-soon animate-on-scroll">
-                <div class="vertical-icon">
-                    <i class="fas fa-home"></i>
+            <div class="workflow-step animate-on-scroll">
+                <div class="step-number">2</div>
+                <div class="step-icon">
+                    <i class="fas fa-boxes"></i>
                 </div>
-                <h4>Home Goods</h4>
-                <p>Furniture, decor, and household items</p>
-                <div class="coming-soon-badge">Q2 2024</div>
+                <h3>Product Access</h3>
+                <p>Access our curated selection of products. Currently focused on apparel and accessories, with competitive pricing.</p>
             </div>
             
-            <div class="vertical-card coming-soon animate-on-scroll">
-                <div class="vertical-icon">
-                    <i class="fas fa-mobile-alt"></i>
+            <div class="workflow-step animate-on-scroll">
+                <div class="step-number">3</div>
+                <div class="step-icon">
+                    <i class="fas fa-shipping-fast"></i>
                 </div>
-                <h4>Electronics</h4>
-                <p>Gadgets, accessories, and tech products</p>
-                <div class="coming-soon-badge">Q3 2024</div>
-            </div>
-            
-            <div class="vertical-card coming-soon animate-on-scroll">
-                <div class="vertical-icon">
-                    <i class="fas fa-shopping-basket"></i>
-                </div>
-                <h4>Grocery & Food</h4>
-                <p>Essential groceries and specialty foods</p>
-                <div class="coming-soon-badge">Q4 2024</div>
+                <h3>Delivery System</h3>
+                <p>Utilize our delivery network across Kenya. Reliable shipping with tracking and customer support.</p>
             </div>
         </div>
     </section>
@@ -1032,18 +994,18 @@
     <!-- Franchise Workflow Section -->
     <section id="workflow">
         <div class="section-header">
-            <h2>The DSOG Franchise Platform Workflow</h2>
-            <p>Our structured online process ensures your success across all verticals</p>
+            <h2>How It Works</h2>
+            <p class="lead">A straightforward process to start your business</p>
         </div>
         
         <div class="workflow-container">
             <div class="workflow-step animate-on-scroll">
                 <div class="step-number">1</div>
                 <div class="step-icon">
-                    <i class="fas fa-handshake"></i>
+                    <i class="fas fa-file-signature"></i>
                 </div>
-                <h3>Platform Onboarding</h3>
-                <p>Join our franchise platform and select your preferred vertical. Our team guides you through digital onboarding.</p>
+                <h3>Application</h3>
+                <p>Complete our simple application process. Our team will guide you through requirements and answer questions.</p>
             </div>
             
             <div class="workflow-step animate-on-scroll">
@@ -1051,128 +1013,60 @@
                 <div class="step-icon">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
-                <h3>Vertical-Specific Training</h3>
-                <p>Complete online training for your chosen vertical - currently fashion. Future verticals will have specialized training.</p>
+                <h3>Training</h3>
+                <p>Access our online training platform. Learn inventory management, customer service, and business operations.</p>
             </div>
             
             <div class="workflow-step animate-on-scroll">
                 <div class="step-number">3</div>
                 <div class="step-icon">
-                    <i class="fas fa-truck-loading"></i>
+                    <i class="fas fa-laptop"></i>
                 </div>
-                <h3>Digital Inventory Access</h3>
-                <p>Access our extensive digital catalog. Currently fashion-focused, expanding to other product categories soon.</p>
+                <h3>Setup</h3>
+                <p>Get your online store configured with your branding. Access the product catalog and set up payment methods.</p>
             </div>
             
             <div class="workflow-step animate-on-scroll">
                 <div class="step-number">4</div>
                 <div class="step-icon">
-                    <i class="fas fa-store"></i>
+                    <i class="fas fa-rocket"></i>
                 </div>
-                <h3>Online Store Setup</h3>
-                <p>Get your personalized online store on our platform, ready for your chosen vertical's products.</p>
-            </div>
-            
-            <div class="workflow-step animate-on-scroll">
-                <div class="step-number">5</div>
-                <div class="step-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Platform Support</h3>
-                <p>Receive continuous support including inventory management, digital marketing, and business development.</p>
-            </div>
-            
-            <div class="workflow-step animate-on-scroll">
-                <div class="step-number">6</div>
-                <div class="step-icon">
-                    <i class="fas fa-shipping-fast"></i>
-                </div>
-                <h3>Delivery System</h3>
-                <p>Utilize our proprietary DSOG Delivery System to ship products across Kenya with reliable logistics.</p>
+                <h3>Launch</h3>
+                <p>Go live with marketing support. Start taking orders and grow your business with our ongoing assistance.</p>
             </div>
         </div>
     </section>
 
-    <!-- Online Franchise Section -->
-    <section id="online" class="online-store-section">
-        <h2>100% Online Franchise Platform</h2>
-        <p>Our platform operates fully online - no physical location needed. Run your business from anywhere with internet access.</p>
-        
-        <div class="online-features">
-            <div class="online-feature animate-on-scroll">
-                <i class="fas fa-layer-group"></i>
-                <h3>Multi-Vertical Platform</h3>
-                <p>Start with fashion, expand to other verticals as our platform grows. One system for all your online businesses.</p>
-            </div>
-            
-            <div class="online-feature animate-on-scroll">
-                <i class="fas fa-mobile-alt"></i>
-                <h3>Mobile-First Platform</h3>
-                <p>Access your business dashboard and manage orders through our mobile-responsive platform.</p>
-            </div>
-            
-            <div class="online-feature animate-on-scroll">
-                <i class="fas fa-sync-alt"></i>
-                <h3>Scalable System</h3>
-                <p>Start with one vertical, add more as we expand. Grow your business portfolio on our platform.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Franchise Benefits -->
+    <!-- Benefits Section -->
     <section id="benefits">
         <div class="section-header">
-            <h2>Why Choose DSOG Platform?</h2>
-            <p>We focus on quality service delivery and partner success across all verticals</p>
+            <h2>Why Choose Our Platform</h2>
+            <p class="lead">Designed for success with comprehensive support</p>
         </div>
         
         <div class="benefits-container">
             <div class="benefit-card animate-on-scroll">
                 <div class="benefit-icon">
-                    <i class="fas fa-layer-group"></i>
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-                <h3>Multi-Vertical Platform</h3>
-                <p>Join a growing platform, not just a single business. Start with fashion, expand to other verticals as we grow.</p>
-            </div>
-            
-            <div class="benefit-card animate-on-scroll">
-                <div class="benefit-icon">
-                    <i class="fas fa-chart-pie"></i>
-                </div>
-                <h3>Proven E-Commerce Model</h3>
-                <p>Operate with a tested online business model that minimizes overhead costs and maximizes profitability.</p>
-            </div>
-            
-            <div class="benefit-card animate-on-scroll">
-                <div class="benefit-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <h3>Vertical-Specific Training</h3>
-                <p>Receive thorough online training specific to your chosen vertical, with more training modules coming.</p>
-            </div>
-            
-            <div class="benefit-card animate-on-scroll">
-                <div class="benefit-icon">
-                    <i class="fas fa-truck"></i>
-                </div>
-                <h3>DSOG Delivery Network</h3>
-                <p>Access our nationwide delivery network to efficiently serve customers across different locations in Kenya.</p>
-            </div>
-            
-            <div class="benefit-card animate-on-scroll">
-                <div class="benefit-icon">
-                    <i class="fas fa-bullhorn"></i>
-                </div>
-                <h3>Platform Marketing</h3>
-                <p>Benefit from platform-wide marketing campaigns plus vertical-specific promotional assistance.</p>
+                <h3>Low Risk Model</h3>
+                <p>Start with minimal investment. No need for physical store, inventory storage, or complex logistics setup.</p>
             </div>
             
             <div class="benefit-card animate-on-scroll">
                 <div class="benefit-icon">
                     <i class="fas fa-headset"></i>
                 </div>
-                <h3>24/7 Platform Support</h3>
-                <p>Round-the-clock support from our platform team for any operational, technical, or business queries.</p>
+                <h3>Full Support</h3>
+                <p>Technical, operational, and business support. Dedicated team to help with any challenges you face.</p>
+            </div>
+            
+            <div class="benefit-card animate-on-scroll">
+                <div class="benefit-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Proven System</h3>
+                <p>Business model tested and refined. Established processes for inventory, sales, and customer service.</p>
             </div>
         </div>
     </section>
@@ -1180,45 +1074,36 @@
     <!-- Opportunities Section -->
     <section id="opportunities">
         <div class="section-header">
-            <h2>Multiple Platform Opportunities</h2>
-            <p>Join the DSOG Platform in various capacities across multiple verticals</p>
+            <h2>Business Opportunities</h2>
+            <p class="lead">Different ways to join our platform</p>
         </div>
         
         <div class="opportunities-container">
             <div class="opportunity-card animate-on-scroll">
                 <div class="opportunity-icon">
-                    <i class="fas fa-store-alt"></i>
+                    <i class="fas fa-user-tie"></i>
                 </div>
-                <h3>Platform Franchise Owners</h3>
-                <p>Run your own DSOG online store on our platform. Start with fashion, expand to other verticals as we grow.</p>
-                <a href="#contact" class="cta-button">Join Platform</a>
+                <h3>Business Owner</h3>
+                <p>Run your own online store with our support. Ideal for entrepreneurs looking for a turnkey business solution.</p>
+                <a href="#contact" class="cta-button">Start Business</a>
             </div>
             
             <div class="opportunity-card animate-on-scroll">
                 <div class="opportunity-icon">
                     <i class="fas fa-boxes"></i>
                 </div>
-                <h3>Vertical Suppliers</h3>
-                <p>Supply quality products to our platform across different verticals. We need suppliers for current and future verticals.</p>
-                <a href="#contact" class="cta-button">Become a Supplier</a>
+                <h3>Product Supplier</h3>
+                <p>Supply products to our network. We work with manufacturers and distributors of quality items.</p>
+                <a href="#contact" class="cta-button">Supply Products</a>
             </div>
             
             <div class="opportunity-card animate-on-scroll">
                 <div class="opportunity-icon">
-                    <i class="fas fa-shipping-fast"></i>
+                    <i class="fas fa-truck"></i>
                 </div>
-                <h3>Delivery Partners</h3>
-                <p>Join our DSOG Delivery System network. We need reliable delivery partners across Kenya to serve our platform customers.</p>
-                <a href="#contact" class="cta-button">Partner with Us</a>
-            </div>
-            
-            <div class="opportunity-card animate-on-scroll">
-                <div class="opportunity-icon">
-                    <i class="fas fa-user-tie"></i>
-                </div>
-                <h3>Platform Team</h3>
-                <p>Join our platform team in various roles - platform development, vertical expansion, franchise support, and management.</p>
-                <a href="#contact" class="cta-button">View Platform Careers</a>
+                <h3>Delivery Partner</h3>
+                <p>Join our delivery network. Serve customers across different regions with our logistics system.</p>
+                <a href="#contact" class="cta-button">Delivery Partnership</a>
             </div>
         </div>
     </section>
@@ -1226,16 +1111,16 @@
     <!-- CTA Section -->
     <section id="contact" class="cta-section">
         <div class="section-header">
-            <h2>Join Our Platform Today</h2>
-            <p>Take the first step toward owning a successful online business on our multi-vertical franchise platform</p>
+            <h2>Ready to Start?</h2>
+            <p class="lead">Contact us today to begin your business journey</p>
         </div>
         
         <div class="hero-buttons">
             <a href="https://wa.me/254733737983" target="_blank" class="cta-button">
-                <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
+                <i class="fab fa-whatsapp"></i> WhatsApp Us
             </a>
             <a href="tel:0733737983" class="cta-button secondary-button">
-                <i class="fas fa-phone"></i> Call Now: 0733 737 983
+                <i class="fas fa-phone"></i> Call: 0733 737 983
             </a>
         </div>
         
@@ -1245,8 +1130,8 @@
                     <i class="fas fa-phone"></i>
                 </div>
                 <div>
-                    <strong>Phone/WhatsApp</strong>
-                    <div>0733 737 983</div>
+                    <div class="text-small">Business Inquiries</div>
+                    <div class="text-medium">0733 737 983</div>
                 </div>
             </div>
             
@@ -1255,18 +1140,18 @@
                     <i class="fas fa-envelope"></i>
                 </div>
                 <div>
-                    <strong>Email</strong>
-                    <div>office.dsog@gmail.com</div>
+                    <div class="text-small">Email</div>
+                    <div class="text-medium">office.dsog@gmail.com</div>
                 </div>
             </div>
             
             <div class="contact-item">
                 <div class="contact-icon">
-                    <i class="fas fa-layer-group"></i>
+                    <i class="fas fa-clock"></i>
                 </div>
                 <div>
-                    <strong>Current Vertical</strong>
-                    <div>Fashion & Apparel</div>
+                    <div class="text-small">Available</div>
+                    <div class="text-medium">Mon-Sat, 8AM-6PM</div>
                 </div>
             </div>
         </div>
@@ -1276,97 +1161,70 @@
     <section class="brands-section">
         <div class="brands-container">
             <div class="section-header">
-                <h2>Our Platform Partners</h2>
-                <p>We source quality products from reputable suppliers across different verticals</p>
+                <h2>Our Partners</h2>
+                <p class="lead">Quality products from trusted suppliers</p>
             </div>
             
             <div class="brands-scroll">
                 <div class="brands-track">
-                    <!-- Current fashion partners -->
+                    <!-- Brand partners -->
                     <div class="brand-item">
                         <img src="https://i.postimg.cc/c4zFGFxn/COLLECTIONS-removebg-preview.png" alt="HOG Creations" class="brand-logo">
                         <h4>HOG Creations</h4>
-                        <small>Fashion Partner</small>
                     </div>
                     
                     <div class="brand-item">
-                        <div class="brand-icon" style="font-size: 3rem; color: var(--primary-red);">
+                        <div class="brand-icon" style="font-size: 2.5rem; color: var(--primary-red);">
                             <i class="fas fa-tshirt"></i>
                         </div>
                         <h4>Visha Apparel</h4>
-                        <small>Fashion Clothing</small>
                     </div>
                     
                     <div class="brand-item">
-                        <div class="brand-icon" style="font-size: 3rem; color: var(--primary-red);">
+                        <div class="brand-icon" style="font-size: 2.5rem; color: var(--primary-red);">
                             <i class="fas fa-shoe-prints"></i>
                         </div>
                         <h4>Yarnxe</h4>
-                        <small>Shoe Brand</small>
                     </div>
                     
                     <div class="brand-item">
-                        <img src="https://i.postimg.cc/bNy1yZ5x/logo-(3).png" alt="HOG Creations" class="brand-logo">
+                        <img src="https://i.postimg.cc/bNy1yZ5x/logo-(3).png" alt="Fitare Sports" class="brand-logo">
                         <h4>Fitare Sports</h4>
-                        <small>Sports Partner</small>
                     </div>
                     
-                    <!-- Future vertical partners -->
                     <div class="brand-item">
-                        <div class="brand-icon" style="font-size: 3rem; color: var(--primary-red);">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <h4>Home Goods</h4>
-                        <small>Coming Soon</small>
-                    </div>
-
-                    <div class="brand-item">
-                         <img src="https://i.postimg.cc/15JrVm4g/Teleioo-Fusion-removebg-preview.png" alt="HOG Creations" class="brand-logo">
-                         <h4>Fusion Foods</h4>
-                         <small>Food Partner (Coming)</small>
+                        <img src="https://i.postimg.cc/15JrVm4g/Teleioo-Fusion-removebg-preview.png" alt="Fusion Foods" class="brand-logo">
+                        <h4>Fusion</h4>
                     </div>
                     
                     <!-- Duplicate for seamless loop -->
                     <div class="brand-item">
                         <img src="https://i.postimg.cc/c4zFGFxn/COLLECTIONS-removebg-preview.png" alt="HOG Creations" class="brand-logo">
                         <h4>HOG Creations</h4>
-                        <small>Fashion Partner</small>
                     </div>
                     
                     <div class="brand-item">
-                        <div class="brand-icon" style="font-size: 3rem; color: var(--primary-red);">
+                        <div class="brand-icon" style="font-size: 2.5rem; color: var(--primary-red);">
                             <i class="fas fa-tshirt"></i>
                         </div>
                         <h4>Visha Apparel</h4>
-                        <small>Fashion Clothing</small>
                     </div>
                     
                     <div class="brand-item">
-                        <div class="brand-icon" style="font-size: 3rem; color: var(--primary-red);">
+                        <div class="brand-icon" style="font-size: 2.5rem; color: var(--primary-red);">
                             <i class="fas fa-shoe-prints"></i>
                         </div>
                         <h4>Yarnxe</h4>
-                        <small>Shoe Brand</small>
                     </div>
                     
                     <div class="brand-item">
-                        <img src="https://i.postimg.cc/bNy1yZ5x/logo-(3).png" alt="HOG Creations" class="brand-logo">
+                        <img src="https://i.postimg.cc/bNy1yZ5x/logo-(3).png" alt="Fitare Sports" class="brand-logo">
                         <h4>Fitare Sports</h4>
-                        <small>Sports Partner</small>
                     </div>
                     
                     <div class="brand-item">
-                        <div class="brand-icon" style="font-size: 3rem; color: var(--primary-red);">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <h4>Home Goods</h4>
-                        <small>Coming Soon</small>
-                    </div>
-
-                     <div class="brand-item">
-                         <img src="https://i.postimg.cc/15JrVm4g/Teleioo-Fusion-removebg-preview.png" alt="HOG Creations" class="brand-logo">
-                         <h4>Fusion Foods</h4>
-                         <small>Food Partner (Coming)</small>
+                        <img src="https://i.postimg.cc/15JrVm4g/Teleioo-Fusion-removebg-preview.png" alt="Fusion Foods" class="brand-logo">
+                        <h4>Fusion</h4>
                     </div>
                 </div>
             </div>
@@ -1378,46 +1236,45 @@
         <div class="footer-content">
             <div class="footer-section">
                 <img src="https://i.postimg.cc/kMZ1jTww/Untitled-design-4-removebg-preview.png" alt="DSOG Enterprise" class="footer-logo">
-                <p>Kenya's premier online franchise platform. Currently launching with Fashion - expanding to multiple verticals soon.</p>
-                <div class="platform-badge" style="margin-top: 1rem;">
-                    MULTI-VERTICAL PLATFORM
+                <p>Online business platform providing complete solutions for entrepreneurs. Start your business with our proven system.</p>
+                <div class="platform-badge" style="margin-top: 1rem; font-size: 0.75rem;">
+                    BUSINESS PLATFORM
                 </div>
             </div>
             
             <div class="footer-section">
-                <h3>Platform Verticals</h3>
+                <h3>Platform</h3>
                 <ul>
-                    <li><strong>• Fashion & Apparel</strong> (Active Now)</li>
-                    <li>• Home Goods (Coming Soon)</li>
-                    <li>• Electronics (Coming Soon)</li>
-                    <li>• Grocery & Food (Coming Soon)</li>
+                    <li><a href="#workflow">How It Works</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#opportunities">Opportunities</a></li>
+                    <li><a href="#contact">Get Started</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h3>Contact Info</h3>
+                <h3>Contact</h3>
                 <ul>
                     <li><i class="fas fa-phone"></i> 0733 737 983</li>
                     <li><i class="fas fa-envelope"></i> office.dsog@gmail.com</li>
-                    <li><i class="fab fa-whatsapp"></i> WhatsApp: 0733 737 983</li>
+                    <li><i class="fab fa-whatsapp"></i> WhatsApp Available</li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h3>Platform Partners</h3>
+                <h3>Products</h3>
                 <ul>
-                    <li>HOG Creations (Fashion)</li>
-                    <li>Visha Apparel (Fashion)</li>
-                    <li>Yarnxe Shoes (Fashion)</li>
-                    <li>Fitare Sports (Sports)</li>
-                    <li>More partners coming...</li>
+                    <li>Apparel & Clothing</li>
+                    <li>Footwear</li>
+                    <li>Accessories</li>
+                    <li>Sports Items</li>
                 </ul>
             </div>
         </div>
         
         <div class="copyright">
-            <p>&copy; <span id="currentYear"></span> DSOG Enterprise Online Franchise Platform. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Current Project: DSOG Fashion Franchise | Platform Expansion in Progress</p>
+            <p>&copy; <span id="currentYear"></span> DSOG Enterprise. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Online Business Platform</p>
         </div>
     </footer>
 
@@ -1428,7 +1285,7 @@
         
         // Scroll animations
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 DSOG Online Franchise Platform');
+            console.log('🚀 DSOG Business Platform');
             
             // Animate elements on scroll
             const animateOnScroll = () => {
@@ -1493,26 +1350,22 @@
             });
             
             // Card hover effects
-            const cards = document.querySelectorAll('.workflow-step, .benefit-card, .opportunity-card, .vertical-card');
+            const cards = document.querySelectorAll('.workflow-step, .benefit-card, .opportunity-card');
             cards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    if (!this.classList.contains('coming-soon')) {
-                        this.style.transform = 'translateY(-10px)';
-                    }
+                    this.style.transform = 'translateY(-5px)';
                 });
                 
                 card.addEventListener('mouseleave', function() {
-                    if (!this.classList.contains('coming-soon')) {
-                        this.style.transform = 'translateY(0)';
-                    }
+                    this.style.transform = 'translateY(0)';
                 });
             });
             
             // Platform messaging
             const platformMessage = `
-                Welcome to DSOG Online Franchise Platform!
-                We're building Kenya's first multi-vertical online franchise system.
-                Currently launching with Fashion - more verticals coming soon!
+                DSOG Business Platform
+                Start your online business with our complete solution.
+                Currently featuring apparel and accessories.
             `;
             console.log(platformMessage);
         });
